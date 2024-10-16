@@ -9,8 +9,13 @@ use App\Http\Controllers\CreateNewBatismoController;
 use App\Http\Controllers\CreateUserController;
 use App\Http\Controllers\FindEnderecoByIdController;
 use App\Http\Controllers\FindUserByIdController;
+use App\Http\Controllers\GetByIdEventController;
 use App\Http\Controllers\GetFamiliaByIdController;
 use App\Http\Controllers\GetUsersController;
+use App\Http\Controllers\ListAllEvents;
+use App\Http\Controllers\ListEventsCloseController;
+use App\Http\Controllers\ListEventsOpenController;
+use App\Http\Controllers\RemoveMembroEventoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,7 +51,11 @@ Route::prefix('batismo')->group(function() {
 
 //Falta testar os endpoints
 Route::prefix('evento')->group(function() {
+    Route::get('/listAll',ListAllEvents::class);
+    Route::get("/findById/{id}",GetByIdEventController::class);
+    Route::get('/listOpen',ListEventsOpenController::class);
+    Route::get('/listClose',ListEventsCloseController::class);
     Route::post('/create',CreateEventoController::class);
     Route::post('/addmembroevento',AddMembroEventController::class);
+    Route::post('/removemembro',RemoveMembroEventoController::class);
 });
-
