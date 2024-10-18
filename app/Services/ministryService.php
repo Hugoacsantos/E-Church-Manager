@@ -12,7 +12,7 @@ class ministryService {
 
     public function create(MinisterioDTO $ministerioDTO): Ministerio {
 
-        if($ministerioDTO->status === '') {
+        if(blank($ministerioDTO->status)) {
             $ministerioDTO->status = 'Ativo';
         }
         $ministry = new Ministerio();
