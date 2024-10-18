@@ -9,32 +9,40 @@ use App\Models\FamiliaUser;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
-class FamiliaServices {
-    
+class FamilyService {
 
-    public function create(FamiliaDTO $familiaDTO) : ?string {
-        if(empty($familiaDTO)) throw new Exception('Nome de familia nao foi passado');
 
-        $familia = Familia::create($familiaDTO->toArray());
-
+    public function create(FamiliaDTO $familiaDTO): Familia {
+        $familia = new Familia();
+        $familia->nomefamilia = $familiaDTO->nomefamilia;
+        $familia->status = $familiaDTO->status;
+        $familia->save();
         return $familia;
     }
 
-    public function listAllFamily(): ?Collection{
-        $familias = Familia::all();
-        return $familias;
+    public function listAllFamily(): Collection{
+        return Familia::all();
     }
 
-    public function findById(int $id) : ?Collection{
-        $familia = Familia::find($id);
-
-        return $familia;
+    public function findById(int $id): Familia{
+        return Familia::find($id);
     }
 
-    public function addMember(MembroFamiliaDTO $membroFamiliaDTO) : ?bool {
-        $family = FamiliaUser::create($membroFamiliaDTO->familia_id,$membroFamiliaDTO->user_id);
+    public function addMember(MembroFamiliaDTO $membroFamiliaDTO): true {
+        $memberExits = FamiliaUser::query()
+                                    ->where('familia_id', $membroFamiliaDTO->familia_id)
+                                    ->where('user_id', $membroFamiliaDTO->user_id)
+                                    ->exists();
 
-        return true;
+        if($memberExits) {
+            throw new Exception('Usuario ja esta cadastrado na familia');
+        }
+
+        $addMemberFamily = new FamiliaUser();
+        $addMemberFamily->familia_id = $membroFamiliaDTO->familia_id;
+        $addMemberFamily->user_id = $membroFamiliaDTO->user_id;
+
+        return $addMemberFamily->save();
     }
 
 }

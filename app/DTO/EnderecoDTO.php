@@ -4,7 +4,7 @@ namespace App\DTO;
 
 class EnderecoDTO
 {
-    public string $user_id;
+    public string $userId;
     public string $rua;
     public string $numero;
     public string $complemento;
@@ -14,7 +14,7 @@ class EnderecoDTO
 
     public function __construct(array $data)
     {
-        $this->user_id = $data['user_id'];
+        $this->userId = $data['user_id'];
         $this->rua = $data['rua'];
         $this->numero = $data['numero'];
         $this->complemento = $data['complemento'];
@@ -25,7 +25,7 @@ class EnderecoDTO
 
     public function toArray(){
         return [
-            'user_id' => $this->user_id,
+            'user_id' => $this->userId,
             'rua' => $this->rua,
             'numero' => $this->numero,
             'complemento' => $this->complemento,
