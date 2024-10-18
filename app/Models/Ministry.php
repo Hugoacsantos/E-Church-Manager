@@ -5,16 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoUsuario extends Model
+class Ministry extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'tipo'
+        'titulo',
+        'descricao',
+        'status'
     ];
-
-    public function usuario() {
-        return $this->hasOne(User::class);
-    }
 }

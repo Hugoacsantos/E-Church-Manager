@@ -5,20 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Endereco extends Model
+class TypeUser extends Model
 {
+    protected $table = 'type_user';
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'rua',
-        'numero',
-        'complemento',
-        'bairro',
-        'cidade',
+        'tipo'
     ];
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function usuario() {
+        return $this->hasOne(User::class);
     }
 }

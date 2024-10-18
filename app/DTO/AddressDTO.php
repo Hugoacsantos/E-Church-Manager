@@ -2,7 +2,7 @@
 
 namespace App\DTO;
 
-class EnderecoDTO
+class AddressDTO
 {
     public string $userId;
     public string $rua;

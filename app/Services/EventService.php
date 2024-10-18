@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
+use App\DTO\EventDTO;
 use App\DTO\EventoDTO;
-use App\Models\Evento;
-use App\Models\EventoUser;
+use App\Models\Event;
+use App\Models\EventUser;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -13,31 +14,31 @@ use Illuminate\Database\Eloquent\Collection;
 class EventService {
 
 
-    public function create(EventoDTO $eventoDTO): Evento {
+    public function create(EventDTO $eventDTO): Event {
         // Validar a data fazer um evento de pelo menos 30 minutos
-        if(empty($eventoDTO->status)) {
+        if(empty($eventDTO->status)) {
             $data['status'] = 'Ativo';
         }
-        $event = new Evento();
-        $event->titulo = $eventoDTO->titulo;
-        $event->descricao = $eventoDTO->descricao;
-        $event->local = $eventoDTO->local;
-        $event->status = $eventoDTO->status;
+        $event = new Event();
+        $event->titulo = $eventDTO->titulo;
+        $event->descricao = $eventDTO->descricao;
+        $event->local = $eventDTO->local;
+        $event->status = $eventDTO->status;
         $event->save();
 
         return $event;
     }
 
     public function listAll(): Collection {
-        return Evento::all();
+        return Event::all();
     }
 
-    public function adicionarMembro(User $user, Evento $evento): true {
+    public function adicionarMembro(User $user, Event $evento): true {
         if($evento->status === 'fechado') {
             throw new Exception('Nao foi possivel associar membro a evento devido ao evento esta fechado');
         }
 
-        $userEvento = EventoUser::query()
+        $userEvento = EventUser::query()
                                 ->where('evento_id', $evento->id)
                                 ->where('user_id', $user->id)
                                 ->exists();
@@ -46,20 +47,20 @@ class EventService {
             throw new Exception('Usuario ja esta no evento');
         }
 
-        $eventUser = new EventoUser();
+        $eventUser = new EventUser();
         $eventUser->user_id = $user->id;
         $eventUser->evento_id = $evento->id;
 
         return $evento->save();
     }
 
-    public function removerMembro(User $user, Evento $evento): true {
+    public function removerMembro(User $user, Event $evento): true {
 
         if($evento->status === 'fechado') {
             throw new Exception('Nao foi possivel associar membro a evento devido ao evento esta fechado');
         }
 
-        $userEvento = EventoUser::query()
+        $userEvento = EventUser::query()
                                 ->where('evento_id', $evento->id)
                                 ->where('user_id', $user->id)
                                 ->get();
@@ -74,14 +75,14 @@ class EventService {
     }
 
     public function eventosAberto(): Collection {
-        return Evento::query()
+        return Event::query()
                     ->where('status','ativo')
                     ->get();
     }
 
 
     public function eventosFechado(): Collection {
-        return Evento::query()
+        return Event::query()
                     ->where('status','fechado')
                     ->get();
     }
@@ -89,7 +90,7 @@ class EventService {
     public function fecharEvento(string $evento_id): true{
 
         // So pode fechar se a data for maior que a data atual
-        $evento = Evento::find($evento_id);
+        $evento = Event::find($evento_id);
 
         if($evento->status == 'fechado') {
             throw new Exception('Evento ja fechado');
@@ -100,7 +101,7 @@ class EventService {
     }
 
     public function findById(string $id): Collection {
-       return Evento::find($id);
+       return Event::find($id);
     }
 
 

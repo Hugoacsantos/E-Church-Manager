@@ -4,7 +4,7 @@ namespace App\DTO;
 
 use DateTime;
 
-class EventoDTO
+class EventDTO
 {
     public string $titulo;
     public string $descricao;
@@ -17,8 +17,8 @@ class EventoDTO
         $this->titulo = $data['titulo'] ?? '';
         $this->descricao = $data['descricao'] ?? '';
         $this->local = $data['local'] ?? '';
-        $this->data = isset($data['data']) ? new DateTime($data['data']) : new DateTime(); 
-        $this->status = $data['status'] ?? 'ativo'; 
+        $this->data = isset($data['data']) ? new DateTime($data['data']) : new DateTime();
+        $this->status = $data['status'] ?? 'ativo';
     }
 
     public function toArray(): array

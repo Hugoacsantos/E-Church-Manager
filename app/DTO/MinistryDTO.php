@@ -2,7 +2,7 @@
 
 namespace App\DTO;
 
-class MinisterioDTO
+class MinistryDTO
 {
     public string $titulo;
     public string $descricao;

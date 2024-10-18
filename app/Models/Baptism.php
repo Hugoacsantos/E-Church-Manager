@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Familia extends Model
+class Baptism extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nomefamilia',
-        'status',
+        'data_batismo',
+        'membro_id',
+        'batizado_por'
     ];
 
-    public function users() {
-        return $this->hasMany(User::class);
+    public function User() {
+        return $this->hasOne(User::class);
     }
 }

@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EventoUser extends Model
+class EventUser extends Model
 {
     use HasFactory;
 
-    protected $table = 'eventos_users';
-
+    protected $table = 'event_user';
 
     protected $fillable = ['user_id','evento_id'];
 
@@ -19,7 +18,7 @@ class EventoUser extends Model
     }
 
     public function eventos() {
-        return $this->hasMany(Evento::class);
+        return $this->hasMany(Event::class);
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTO\UserDTO;
+use App\Enum\AppException;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -10,9 +11,11 @@ use Illuminate\Database\Eloquent\Collection;
 class UserService {
 
     public function create(UserDTO $userDTO): User {
-        $userExists = User::where('email',$userDTO->email)->first();
-        if(blank($userExists)) {
-            throw new Exception('Usuario ja cadastrado');
+        $userExists = User::query()
+                            ->where('email',$userDTO->email)
+                            ->exists();
+        if($userExists) {
+            throw new Exception(AppException::EMAIL_DE_USUARIO_JA_EXISTE->value);
         }
         $user = new User();
         $user->name = $userDTO->name;
@@ -32,22 +35,10 @@ class UserService {
     }
 
     public function findByEmail(string $email): User {
-        // if(blank($email)) {
-        //     throw new Exception('Email nao foi enviado');
-        // }
-        // $user = User::where('email',$email)->first();
-
-        // if(blank($user)) {
-        //     throw new Exception('Email nao foi encontrado');
-        // }
         return User::where('email',$email)->get();
     }
 
     public function changeName(int $id,string $NewName) : true {
-        // $userNotFound = User::find($id);
-        // if(blank($userNotFound)) {
-        //     throw new Exception('Usuario nao encontrado');
-        // }
         $user = User::find($id);
         $user->name = $NewName;
         return $user->save();

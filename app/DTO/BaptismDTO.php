@@ -5,7 +5,7 @@ namespace App\DTO;
 use DateTime;
 use Illuminate\Support\Facades\Date;
 
-class BatismoDTO
+class BaptismDTO
 {
     public DateTime $data_batismo;
     public string $membro_id;
@@ -20,7 +20,8 @@ class BatismoDTO
         $this->url_certificado = $data['url'] ?? '';
     }
 
-    public function toArray(): array {
+    public function toArray(): array
+    {
         return [
             'data_batismo' => $this->data_batismo->format('Y-m-d H:i:s'),
             'membro_id' => $this->membro_id,

@@ -2,7 +2,7 @@
 
 namespace App\DTO;
 
-class FamiliaDTO
+class FamilyDTO
 {
     public string $nomefamilia;
     public string $status;
