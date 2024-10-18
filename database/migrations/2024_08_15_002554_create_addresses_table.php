@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tipos_usuarios', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo');
             $table->foreignId('user_id')->references('id')->on('users');
+            $table->string('rua');
+            $table->string('numero');
+            $table->string('complemento');
+            $table->string('bairro');
+            $table->string('cidade');
+            $table->string('estado');
             $table->timestamps();
         });
     }
@@ -24,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipos_usuarios');
+        Schema::dropIfExists('addresses');
     }
 };

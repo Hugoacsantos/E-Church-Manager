@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('batismos', function (Blueprint $table) {
+        Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('data_batismo')->default(now());
-            $table->foreignId('membro_id')->references('id')->on('users');
-            $table->foreignId('batizado_por')->references('id')->on('users');
-            $table->string('url')->nullable();
+            $table->string('titulo');
+            $table->string('descricao');
+            $table->string('local');
+            $table->date('data');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bastismos');
+        Schema::dropIfExists('events');
     }
 };

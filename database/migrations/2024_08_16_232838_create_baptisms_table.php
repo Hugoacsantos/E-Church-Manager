@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('familias_users', function (Blueprint $table) {
+        Schema::create('baptisms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('familia_id')->references('id')->references('familias');
+            $table->dateTime('data_batismo')->default(now());
+            $table->foreignId('membro_id')->constrained();
+            $table->foreignId('batizado_por')->constrained();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('familias_users');
+        Schema::dropIfExists('baptisms');
     }
 };
