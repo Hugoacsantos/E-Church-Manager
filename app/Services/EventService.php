@@ -33,7 +33,7 @@ class EventService {
         return Event::all();
     }
 
-    public function adicionarMembro(User $user, Event $evento): true {
+    public function addMember(User $user, Event $evento): true {
         if($evento->status === 'fechado') {
             throw new Exception('Nao foi possivel associar membro a evento devido ao evento esta fechado');
         }
@@ -54,7 +54,7 @@ class EventService {
         return $evento->save();
     }
 
-    public function removerMembro(User $user, Event $evento): true {
+    public function removeMember(User $user, Event $evento): true {
 
         if($evento->status === 'fechado') {
             throw new Exception('Nao foi possivel associar membro a evento devido ao evento esta fechado');
@@ -74,20 +74,20 @@ class EventService {
         return $userEvento->delete();
     }
 
-    public function eventosAberto(): Collection {
+    public function eventsOpen(): Collection {
         return Event::query()
                     ->where('status','ativo')
                     ->get();
     }
 
 
-    public function eventosFechado(): Collection {
+    public function eventsClose(): Collection {
         return Event::query()
                     ->where('status','fechado')
                     ->get();
     }
 
-    public function fecharEvento(string $evento_id): true{
+    public function closeEvent(string $evento_id): true{
 
         // So pode fechar se a data for maior que a data atual
         $evento = Event::find($evento_id);

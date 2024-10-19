@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\DTO\BaptismDTO;
 use App\DTO\BatismoDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -30,6 +31,6 @@ class CreateBastimoRequest extends FormRequest
     }
 
     public function toDTO() {
-        return new BatismoDTO($this->validated()); 
+        return new BaptismDTO($this->validated());
     }
 }

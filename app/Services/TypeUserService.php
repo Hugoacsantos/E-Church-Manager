@@ -2,15 +2,19 @@
 
 namespace App\Services;
 
-use App\Enum\TipoUserEnum;
+use App\Enum\TypeUser as EnumTypeUser;
 use App\Models\TypeUser;
 use Illuminate\Database\Eloquent\Collection;
 
 class TypeUserService {
 
-    public function add(string $userId,TipoUserEnum $tipoUsuario = TipoUserEnum::VISITANTE) : TypeUser {
-        $tipoUsuario = TypeUser::create($userId,$tipoUsuario->value);
-        return $tipoUsuario;
+    public function add(string $userId, EnumTypeUser $typeUser = EnumTypeUser::VISITANTE): TypeUser {
+
+        $new = new TypeUser();
+        $new->user_id = $userId;
+        $new->tipo = $typeUser->value;
+        $new->save();
+        return $new;
     }
 
     public function findById(string $id) : Collection {

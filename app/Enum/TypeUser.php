@@ -2,9 +2,9 @@
 
 namespace App\Enum;
 
-enum TipoUserEnum: string
+enum TypeUser: string
 {
-    case MEMBRO = 'Membro';
     case VISITANTE = 'Visitante';
+    case MEMBRO = 'Membro';
     case PASTOR = 'Pastor';
 }

@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\DTO\AddressDTO;
-use App\DTO\EnderecoDTO;
 use App\Models\Address;
 use App\Models\User;
 use Exception;
@@ -20,12 +19,12 @@ class AddressService {
         }
 
         $address = new Address();
-        $address->user_id = $$addressDTO->userId;
-        $address->rua = $$addressDTO->rua;
-        $address->numero = $$addressDTO->numero;
-        $address->complemento = $$addressDTO->complemento;
-        $address->bairro = $$addressDTO->bairro;
-        $address->cidade = $$addressDTO->cidade;
+        $address->user_id = $addressDTO->userId;
+        $address->rua = $addressDTO->rua;
+        $address->numero = $addressDTO->numero;
+        $address->complemento = $addressDTO->complemento;
+        $address->bairro = $addressDTO->bairro;
+        $address->cidade = $addressDTO->cidade;
         $address->save();
 
         return $address;
@@ -36,12 +35,12 @@ class AddressService {
         if(blank($address)) {
             throw new Exception('Endereço nao encontrado');
         }
-        $address->user_id = $$addressDTO->userId;
-        $address->rua = $$addressDTO->rua;
-        $address->numero = $$addressDTO->numero;
-        $address->complemento = $$addressDTO->complemento;
-        $address->bairro = $$addressDTO->bairro;
-        $address->cidade = $$addressDTO->cidade;
+        $address->user_id = $addressDTO->userId;
+        $address->rua = $addressDTO->rua;
+        $address->numero = $addressDTO->numero;
+        $address->complemento = $addressDTO->complemento;
+        $address->bairro = $addressDTO->bairro;
+        $address->cidade = $addressDTO->cidade;
 
         return $address->save();
     }

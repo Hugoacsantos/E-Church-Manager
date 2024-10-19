@@ -47,19 +47,19 @@ class User extends Authenticatable
     }
 
     public function enderecos() {
-       return $this->hasMany(Endereco::class);
+       return $this->hasMany(Address::class);
     }
 
     public function familia() {
-        return $this->belongsTo(Familia::class);
+        return $this->belongsTo(Family::class);
     }
 
     public function batismo() {
-        return $this->belongsTo(Batismo::class);
+        return $this->belongsTo(Baptism::class);
     }
 
     public function tipoUsuario(){
-        return $this->belongsTo(TipoUsuario::class);
+        return $this->belongsTo(TypeUser::class);
     }
 
 }

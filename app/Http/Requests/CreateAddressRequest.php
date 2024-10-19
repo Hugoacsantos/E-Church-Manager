@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\DTO\EnderecoDTO;
+use App\DTO\AddressDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateEnderecoRequest extends FormRequest
+class CreateAddressRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,19 +24,25 @@ class CreateEnderecoRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'rua' => 'required|min:10|max:255',
+            'rua' => 'required|min:3|max:255',
             'numero' => 'required|min:1',
-            'complemento' => 'required|min:10',
-            'bairro' => 'required|min:3'
+            'complemento' => 'required|min:3',
+            'bairro' => 'required|min:3',
+            'cidade' => 'nullable'
         ];
     }
 
     public function messages()
     {
-        
+        return [
+            'user_id.required' => 'O campo usuário é obrigatório.',
+            'rua.required' => 'O campo rua é obrigatório.',
+            'numero.required' => 'O campo número é obrigatório.',
+            'bairro.required' => 'O campo bairro é obrigatório.',
+        ];
     }
 
     public function toDTO() {
-        return new EnderecoDTO($this->validated());
+        return new AddressDTO($this->validated());
     }
 }

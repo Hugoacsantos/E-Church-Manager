@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\DTO\EventDTO;
 use App\DTO\EventoDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -31,6 +32,6 @@ class CreateEventoRequest extends FormRequest
     }
 
     public function toDTO() {
-        return new EventoDTO($this->validated());
+        return new EventDTO($this->validated());
     }
 }

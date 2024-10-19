@@ -19,8 +19,8 @@ class AddressDTO
         $this->numero = $data['numero'];
         $this->complemento = $data['complemento'];
         $this->bairro = $data['bairro'];
-        $this->cidade = $data['cidade'];
-        $this->estado = $data['estado'];
+        $this->cidade = $data['cidade'] ?? '';
+        $this->estado = $data['estado'] ?? '';
     }
 
     public function toArray(){
