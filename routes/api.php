@@ -16,7 +16,8 @@
 // use App\Http\Controllers\ListEventsOpenController;
 // use App\Http\Controllers\RemoveMembroEventoController;
 
-use App\Http\Controllers\Address\CreateAddress;
+use App\Http\Controllers\Address\CreateAddressController;
+use App\Http\Controllers\Address\FindAddressController;
 use App\Http\Controllers\Address\FindEnderecoByIdController;
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\FindUserByIdController;
@@ -37,8 +38,8 @@ Route::prefix('user')->group(function (){
 
 // Falta testa esses endpoints
 Route::prefix('address')->group(function () {
-    Route::get('/{id}',FindEnderecoByIdController::class);
-    Route::post('/create',CreateAddress::class);
+    Route::get('/{id}',FindAddressController::class);
+    Route::post('/create',CreateAddressController::class);
 });
 
 // // falta testar esses endpoints

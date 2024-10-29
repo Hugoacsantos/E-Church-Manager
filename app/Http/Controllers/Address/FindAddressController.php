@@ -7,7 +7,7 @@ use App\Services\AddressService;
 use App\Services\EnderecoServices;
 use Illuminate\Http\Request;
 
-class FindEnderecoByIdController extends Controller
+class FindAddressController extends Controller
 {
     public function __construct(
         public AddressService $addressService
@@ -17,9 +17,8 @@ class FindEnderecoByIdController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request,string $user_id) {
-        $endereco = $this->addressService->findById($user_id);
-
+    public function __invoke(string $id) {
+        $endereco = $this->addressService->findById($id);
         return \response()->json($endereco);
     }
 }

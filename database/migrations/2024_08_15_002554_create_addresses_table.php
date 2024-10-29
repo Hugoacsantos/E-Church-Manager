@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('numero');
             $table->string('complemento');
             $table->string('bairro');
-            $table->string('cidade');
-            $table->string('estado');
+            $table->string('cidade')->nullable();
+            $table->string('estado')->nullable();
             $table->timestamps();
         });
     }

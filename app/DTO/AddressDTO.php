@@ -14,27 +14,25 @@ class AddressDTO
 
     public function __construct(array $data)
     {
-        $this->userId = $data['user_id'];
-        $this->rua = $data['rua'];
-        $this->numero = $data['numero'];
-        $this->complemento = $data['complemento'];
-        $this->bairro = $data['bairro'];
-        $this->cidade = $data['cidade'] ?? '';
-        $this->estado = $data['estado'] ?? '';
+        $this->userId = $data["user_id"];
+        $this->rua = $data["rua"];
+        $this->numero = $data["numero"];
+        $this->complemento = $data["complemento"];
+        $this->bairro = $data["bairro"];
+        $this->cidade = $data["cidade"] ?? "";
+        $this->estado = $data["estado"] ?? "";
     }
 
-    public function toArray(){
+    public function toArray(): array
+    {
         return [
-            'user_id' => $this->userId,
-            'rua' => $this->rua,
-            'numero' => $this->numero,
-            'complemento' => $this->complemento,
-            'bairro' => $this->bairro,
-            'cidade' => $this->cidade,
-            'estado' => $this->estado,
+            "user_id" => $this->userId,
+            "rua" => $this->rua,
+            "numero" => $this->numero,
+            "complemento" => $this->complemento,
+            "bairro" => $this->bairro,
+            "cidade" => $this->cidade,
+            "estado" => $this->estado,
         ];
     }
-
-
-
 }

@@ -15,8 +15,9 @@ class AddressService {
         $total = $this->getAddressCount($user);
 
         if($total > self::TOTAL_ALLOWED_ADDRESSES) {
-            throw new Exception('Ususario ja possui o total permitido de endereco cadastrado');
+            throw new Exception('Usuario ja possui o total permitido de endereco cadastrado');
         }
+
 
         $address = new Address();
         $address->user_id = $addressDTO->userId;
@@ -45,12 +46,12 @@ class AddressService {
         return $address->save();
     }
 
-    public function findById(int $id): Address {
-        return Address::find($id)->get();
+    public function findById(string $id): Address {
+        return Address::find($id);
     }
 
     private function getAddressCount(User $user): int {
-        return $user->enderecos()->count();
+        return $user->address()->count();
     }
 
 }
