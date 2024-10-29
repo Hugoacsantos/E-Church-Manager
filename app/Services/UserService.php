@@ -44,5 +44,10 @@ class UserService {
         return $user->save();
     }
 
+    public function removeMember(string $userId): true {
+        $user = User::find($userId);
+        $user->delete();
+        return true;
+    }
 
 }

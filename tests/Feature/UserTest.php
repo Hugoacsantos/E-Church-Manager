@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabaseState;
 
 // uses(RefreshDatabaseState::class);
@@ -42,3 +43,20 @@ test('deve encontrar por id um usuario', function() {
     // print_r($response->getData().PHP_EOL);
     $response->assertStatus(200);
 });
+
+test('Deve remover um usuario', function() {
+
+    $data = [
+        'name' => fake()->name(),
+        'email' => fake()->email(),
+        'password' => fake()->regexify('[A-Z]{5}[0-4]{3}')
+    ];
+
+    $response1 = $this->postJson('/api/user/create',$data);
+    $user = $response1->json();
+
+    $response = $this->deleteJson('api/user/removemember/'.$user['id']);
+
+    $response->assertStatus(200);
+    $response->assertJson(['message' => true]);
+})->only();

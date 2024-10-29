@@ -18,8 +18,8 @@
 
 use App\Http\Controllers\Address\CreateAddressController;
 use App\Http\Controllers\Address\FindAddressController;
-use App\Http\Controllers\Address\FindEnderecoByIdController;
 use App\Http\Controllers\User\CreateUserController;
+use App\Http\Controllers\User\DeleteMemberController;
 use App\Http\Controllers\User\FindUserByIdController;
 use App\Http\Controllers\User\GetUsersController;
 use Illuminate\Http\Request;
@@ -34,6 +34,7 @@ Route::prefix('user')->group(function (){
     Route::get('/',GetUsersController::class);
     Route::post('/create',CreateUserController::class);
     Route::get('/{id}',FindUserByIdController::class);
+    Route::delete('/removemember/{id}', DeleteMemberController::class);
 });
 
 // Falta testa esses endpoints
