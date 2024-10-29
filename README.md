@@ -42,9 +42,3 @@ A API de Gestão de Igreja é uma aplicação robusta desenvolvida em Laravel 11
 - PHP 8.2 ou superior
 - Composer
 - MySQL ou SQLite
-
-### Passos para Configuração
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
-   cd nome-do-repositorio
