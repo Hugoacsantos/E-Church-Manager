@@ -1,7 +1,7 @@
 <?php
 
 test('Deve trazer varias familias', function () {
-    $response = $this->get('/api/familia');
+    $response = $this->get('/api/family/');
 
     $response->assertStatus(200);
 });

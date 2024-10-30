@@ -19,6 +19,7 @@
 use App\Http\Controllers\Address\CreateAddressController;
 use App\Http\Controllers\Address\FindAddressController;
 use App\Http\Controllers\Family\CreateFamilyController;
+use App\Http\Controllers\Family\GetFamiliesController;
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\DeleteMemberController;
 use App\Http\Controllers\User\FindUserByIdController;
@@ -46,6 +47,7 @@ Route::prefix('address')->group(function () {
 // falta testar esses endpoints
 Route::prefix('family')->group(function () {
     Route::post('/create', CreateFamilyController::class);
+    Route::get('/',GetFamiliesController::class);
     // Route::get('/{id}', GetFamiliaByIdController::class);
     // Route::post('/adicionarmembro',AddMemberInFamiliaController::class);
 });
