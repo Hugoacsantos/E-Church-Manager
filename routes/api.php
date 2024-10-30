@@ -18,6 +18,7 @@
 
 use App\Http\Controllers\Address\CreateAddressController;
 use App\Http\Controllers\Address\FindAddressController;
+use App\Http\Controllers\Family\CreateFamilyController;
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\DeleteMemberController;
 use App\Http\Controllers\User\FindUserByIdController;
@@ -37,18 +38,17 @@ Route::prefix('user')->group(function (){
     Route::delete('/removemember/{id}', DeleteMemberController::class);
 });
 
-// Falta testa esses endpoints
 Route::prefix('address')->group(function () {
     Route::get('/{id}',FindAddressController::class);
     Route::post('/create',CreateAddressController::class);
 });
 
-// // falta testar esses endpoints
-// Route::prefix('familia')->group(function () {
-//     Route::post('/create',  CreateFamiliaNameController::class);
-//     Route::get('/{id}', GetFamiliaByIdController::class);
-//     Route::post('/adicionarmembro',AddMemberInFamiliaController::class);
-// });
+// falta testar esses endpoints
+Route::prefix('family')->group(function () {
+    Route::post('/create', CreateFamilyController::class);
+    // Route::get('/{id}', GetFamiliaByIdController::class);
+    // Route::post('/adicionarmembro',AddMemberInFamiliaController::class);
+});
 
 
 // // Falta testa esses endpoints

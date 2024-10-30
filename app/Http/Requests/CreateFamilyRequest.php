@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\DTO\FamiliaDTO;
+use App\DTO\FamilyDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateFamilia extends FormRequest
+class CreateFamilyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,11 @@ class CreateFamilia extends FormRequest
     public function rules(): array
     {
         return [
-            'titulo' => 'required|min:4|max:50',
-            'descricao' => 'required|min:10|max:255',
+            'name' => 'required|min:4|max:50',
         ];
     }
 
     public function toDTO() {
-        return new FamiliaDTO($this->validated());
+        return new FamilyDTO($this->validated());
     }
 }

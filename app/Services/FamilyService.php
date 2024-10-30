@@ -15,7 +15,7 @@ class FamilyService {
 
     public function create(FamilyDTO $familyDTO): Family {
         $familia = new Family();
-        $familia->nomefamilia = $familyDTO->nomefamilia;
+        $familia->nomefamilia = $familyDTO->name;
         $familia->status = $familyDTO->status;
         $familia->save();
         return $familia;

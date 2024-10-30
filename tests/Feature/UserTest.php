@@ -59,4 +59,4 @@ test('Deve remover um usuario', function() {
 
     $response->assertStatus(200);
     $response->assertJson(['message' => true]);
-})->only();
+});
