@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Family;
 
-use App\Http\Requests\AddMembroFamilia;
-use App\Services\FamiliaServices;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AddMemberFamilyRequest;
+use App\Services\FamilyService;
 
 class AddMemberInFamiliaController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(AddMembroFamilia $request)
-    {
-        $service = new FamiliaServices;
+    public function __invoke(AddMemberFamilyRequest $request, FamilyService $familyService) {
 
-        $membro = $service->addMember($request->toDTO());
+        $membro = $familyService->addMember($request->toDTO());
 
 
+        return response()->json($membro);
     }
 }

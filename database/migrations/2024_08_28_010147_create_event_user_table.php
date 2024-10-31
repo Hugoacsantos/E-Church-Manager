@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('event_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('evento_id')->constrained();
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('evento_id')->references('id')->on('events');
             $table->string('status');
             $table->timestamps();
         });

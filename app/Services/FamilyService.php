@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
-use App\DTO\FamiliaDTO;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+uses(RefreshDatabase::class);
+
 use App\DTO\FamilyDTO;
 use App\DTO\FamilyMemberDTO;
 use App\Models\Family;
@@ -21,18 +24,18 @@ class FamilyService {
         return $familia;
     }
 
-    public function listAllFamily(): Collection{
+    public function listAllFamily(): Collection {
         return Family::all();
     }
 
-    public function findById(int $id): Family{
+    public function findById(int $id): Family {
         return Family::find($id);
     }
 
     public function addMember(FamilyMemberDTO $familyMemberDTO): true {
         $memberExits = FamilyUser::query()
-                                    ->where('familia_id', $familyMemberDTO->familia_id)
-                                    ->where('user_id', $familyMemberDTO->user_id)
+                                    ->where('family_id', $familyMemberDTO->familyId)
+                                    ->where('user_id', $familyMemberDTO->userId)
                                     ->exists();
 
         if($memberExits) {
@@ -40,8 +43,8 @@ class FamilyService {
         }
 
         $addMemberFamily = new FamilyUser();
-        $addMemberFamily->familia_id = $familyMemberDTO->familia_id;
-        $addMemberFamily->user_id = $familyMemberDTO->user_id;
+        $addMemberFamily->family_id = $familyMemberDTO->familyId;
+        $addMemberFamily->user_id = $familyMemberDTO->userId;
 
         return $addMemberFamily->save();
     }

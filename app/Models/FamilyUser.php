@@ -10,13 +10,6 @@ class FamilyUser extends Model
     protected $table = 'family_user';
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'familia_id'
-    ];
-
-
-
-
+    protected $fillable = [];
 
 }

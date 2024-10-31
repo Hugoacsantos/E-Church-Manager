@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('baptisms', function (Blueprint $table) {
             $table->id();
             $table->dateTime('data_batismo')->default(now());
-            $table->foreignId('membro_id')->constrained();
-            $table->foreignId('batizado_por')->constrained();
+            $table->foreignId('membro_id')->references('id')->on('users');
+            $table->foreignId('batizado_por')->references('id')->on('users');
             $table->string('url')->nullable();
             $table->timestamps();
         });
