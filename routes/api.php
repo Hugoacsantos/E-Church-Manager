@@ -18,13 +18,14 @@
 
 use App\Http\Controllers\Address\CreateAddressController;
 use App\Http\Controllers\Address\FindAddressController;
-use App\Http\Controllers\Family\CreateFamilyController;
-use App\Http\Controllers\Family\GetFamiliesController;
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\DeleteMemberController;
 use App\Http\Controllers\User\FindUserByIdController;
 use App\Http\Controllers\User\GetUsersController;
 use App\Http\Controllers\Family\AddMemberInFamiliaController;
+use App\Http\Controllers\Family\GetFamiliaByIdController;
+use App\Http\Controllers\Family\CreateFamilyController;
+use App\Http\Controllers\Family\GetFamiliesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,7 +50,7 @@ Route::prefix('address')->group(function () {
 Route::prefix('family')->group(function () {
     Route::post('/create', CreateFamilyController::class);
     Route::get('/',GetFamiliesController::class);
-    // Route::get('/{id}', GetFamiliaByIdController::class);
+    Route::get('/{id}', GetFamiliaByIdController::class);
     Route::post('/addmemberfamily',AddMemberInFamiliaController::class);
 });
 

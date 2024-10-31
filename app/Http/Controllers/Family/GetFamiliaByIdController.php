@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Family;
 
-use App\Services\FamiliaServices;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Services\FamilyService;
 
 class GetFamiliaByIdController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request, string $id)
+    public function __invoke(string $id, FamilyService $familyService)
     {
-        $service = new FamiliaServices;
-
-        $familia = $service->findById($id);
+        $family = $familyService->findById($id);
 
 
-        return \response()->json($familia);
+        return \response()->json($family);
     }
 }
