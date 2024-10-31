@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 test('Deve trazer varias familias', function () {
     $response = $this->get('/api/family/');
 
@@ -16,4 +18,24 @@ test('Deve criar uma familia', function() {
 
 
     $response->assertStatus(200);
+});
+
+test('Deve adicionar um membro a uma familia existente',function(){
+    $data = [
+        'name' => fake()->name()
+    ];
+
+    $user = User::factory()->create();
+
+    $response = $this->postJson('api/family/create', $data);
+    $family = $response->json();
+
+    $data2 = [
+        'familyId' => $family['id'],
+        'userId' => $user->id
+    ];
+
+    $response1 = $this->postJson('api/family/addmemberfamily',$data2);
+
+    $response1->assertStatus(200);
 });

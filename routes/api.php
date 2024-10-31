@@ -24,6 +24,7 @@ use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\DeleteMemberController;
 use App\Http\Controllers\User\FindUserByIdController;
 use App\Http\Controllers\User\GetUsersController;
+use App\Http\Controllers\Family\AddMemberInFamiliaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,7 +50,7 @@ Route::prefix('family')->group(function () {
     Route::post('/create', CreateFamilyController::class);
     Route::get('/',GetFamiliesController::class);
     // Route::get('/{id}', GetFamiliaByIdController::class);
-    // Route::post('/adicionarmembro',AddMemberInFamiliaController::class);
+    Route::post('/addmemberfamily',AddMemberInFamiliaController::class);
 });
 
 

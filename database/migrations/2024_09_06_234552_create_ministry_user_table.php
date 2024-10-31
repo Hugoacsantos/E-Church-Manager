@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('ministry_user', function (Blueprint $table) {
             $table->id();
             $table->string('tipo_usuario');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('ministerios_id')->constrained();
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('ministerios_id')->references('id')->on('ministries');
             $table->string('status');
             $table->timestamps();
         });
