@@ -28,7 +28,7 @@ class FamilyService {
         return Family::all();
     }
 
-    public function findById(int $id): Family {
+    public function findById(string $id): Family {
         return Family::find($id);
     }
 
@@ -47,6 +47,19 @@ class FamilyService {
         $addMemberFamily->user_id = $familyMemberDTO->userId;
 
         return $addMemberFamily->save();
+    }
+
+    public function removemember(FamilyMemberDTO $familyMemberDTO): true {
+        $memberExits = FamilyUser::query()
+                                        ->where('family_id', $familyMemberDTO->familyId)
+                                        ->where('user_id', $familyMemberDTO->userId)
+                                        ->first();
+
+        if (!$memberExits) {
+            throw new Exception('Usuário não está cadastrado na família');
+        }
+
+        return $memberExits->delete();
     }
 
 }

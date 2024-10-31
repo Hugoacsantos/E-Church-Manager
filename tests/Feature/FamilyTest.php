@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Family;
+use App\Models\FamilyUser;
 use App\Models\User;
 
 test('Deve trazer varias familias', function () {
@@ -49,3 +50,16 @@ test('Deve pegar uma familia por id', function() {
 
     $response->assertStatus(200);
 });
+
+test('Deve remover um usuario da familia', function() {
+    $familyUser = FamilyUser::factory()->create();
+
+    $data = [
+        'familyId' => $familyUser->family_id,
+        'userId' => $familyUser->user_id
+    ];
+    $response = $this->postJson('api/family/removememberfamily',$data);
+    dd($response->json());
+
+    $response->assertStatus(200);
+})->only();

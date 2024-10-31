@@ -26,6 +26,7 @@ use App\Http\Controllers\Family\AddMemberInFamiliaController;
 use App\Http\Controllers\Family\GetFamiliaByIdController;
 use App\Http\Controllers\Family\CreateFamilyController;
 use App\Http\Controllers\Family\GetFamiliesController;
+use App\Http\Controllers\Family\RemoveMemeberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,7 @@ Route::prefix('family')->group(function () {
     Route::get('/',GetFamiliesController::class);
     Route::get('/{id}', GetFamiliaByIdController::class);
     Route::post('/addmemberfamily',AddMemberInFamiliaController::class);
+    Route::post('/removememberfamily', RemoveMemeberController::class);
 });
 
 
