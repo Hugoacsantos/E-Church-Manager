@@ -4,6 +4,10 @@ use App\Models\Family;
 use App\Models\FamilyUser;
 use App\Models\User;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+uses(RefreshDatabase::class);
+
 test('Deve trazer varias familias', function () {
     $response = $this->get('/api/family/');
 
