@@ -59,4 +59,12 @@ class AddressService {
         return $user->address()->count();
     }
 
+    public function findByUserId(User $user): Collection{
+        $address = Address::query()
+                            ->where('user_id',$user->id)
+                            ->get();
+
+        return $address;
+    }
+
 }

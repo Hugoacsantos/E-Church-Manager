@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 
 test('Deve criar um novo endereço', function () {
 
@@ -12,7 +13,7 @@ test('Deve criar um novo endereço', function () {
     $response1 = $this->postJson('/api/user/create',$data);
     $user = $response1->getData();
 
-    $data = [
+    $data2 = [
         'user_id' => $user->id, // Um ID de usuário válido
         'rua' => 'Rua Teste',
         'numero' => '123',
@@ -20,7 +21,7 @@ test('Deve criar um novo endereço', function () {
         'bairro' => 'Centro'
     ];
 
-    $response = $this->postJson('/api/address/create',$data);
+    $response = $this->postJson('/api/address/create',$data2);
 
     $response->assertStatus(200);
 });
@@ -117,5 +118,24 @@ test('Deve listar varios Usuarios', function() {
 
     $response = $this->get('api/address/');
 
+    $response->assertStatus(200);
+});
+
+test('Deve retornar um ou mais endereço', function() {
+    $user = User::factory()->create();
+    $data = [
+        'user_id' => $user->id, // Um ID de usuário válido
+        'rua' => 'Rua Teste',
+        'numero' => '123',
+        'complemento' => 'Apto 456',
+        'bairro' => 'Centro'
+    ];
+
+    $response1 = $this->postJson('/api/address/create',$data);
+
+    $response = $this->getJson('api/address/findbyuser/'.$user->id);
+
+
+    expect($response->Json())->not()->toBeEmpty();
     $response->assertStatus(200);
 })->only();

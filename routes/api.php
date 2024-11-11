@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Address\CreateAddressController;
 use App\Http\Controllers\Address\FindAddressController;
+use App\Http\Controllers\Address\FindByUserController;
 use App\Http\Controllers\Address\GetAddressesController;
 use App\Http\Controllers\Baptism\CreateNewBatismoController;
 use App\Http\Controllers\User\CreateUserController;
@@ -30,8 +31,9 @@ Route::prefix('user')->group(function (){
 
 Route::prefix('address')->group(function () {
     Route::get('/',GetAddressesController::class);
-    Route::get('/{id}',FindAddressController::class);
+    // Route::get('/{id}',FindAddressController::class);
     Route::post('/create',CreateAddressController::class);
+    Route::get('/findbyuser/{id}', FindByUserController::class);
 });
 
 
