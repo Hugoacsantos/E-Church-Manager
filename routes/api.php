@@ -1,23 +1,8 @@
 <?php
 
-// use App\Http\Controllers\AddMemberInFamiliaController;
-// use App\Http\Controllers\AddMembroEventController;
-// use App\Http\Controllers\CreateEndereco;
-// use App\Http\Controllers\CreateEventoController;
-// use App\Http\Controllers\CreateFamiliaNameController;
-// use App\Http\Controllers\CreateNewBatismoController;
-// use App\Http\Controllers\FindEnderecoByIdController;
-// use App\Http\Controllers\FindUserByIdController;
-// use App\Http\Controllers\GetByIdEventController;
-// use App\Http\Controllers\GetFamiliaByIdController;
-// use App\Http\Controllers\User\GetUsersController;
-// use App\Http\Controllers\ListAllEvents;
-// use App\Http\Controllers\ListEventsCloseController;
-// use App\Http\Controllers\ListEventsOpenController;
-// use App\Http\Controllers\RemoveMembroEventoController;
-
 use App\Http\Controllers\Address\CreateAddressController;
 use App\Http\Controllers\Address\FindAddressController;
+use App\Http\Controllers\Address\GetAddressesController;
 use App\Http\Controllers\Baptism\CreateNewBatismoController;
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\DeleteMemberController;
@@ -44,6 +29,7 @@ Route::prefix('user')->group(function (){
 });
 
 Route::prefix('address')->group(function () {
+    Route::get('/',GetAddressesController::class);
     Route::get('/{id}',FindAddressController::class);
     Route::post('/create',CreateAddressController::class);
 });
@@ -58,7 +44,6 @@ Route::prefix('family')->group(function () {
 });
 
 
-// Falta testa esses endpoints
 Route::prefix('baptism')->group(function() {
     Route::post('/create',CreateNewBatismoController::class);
 });

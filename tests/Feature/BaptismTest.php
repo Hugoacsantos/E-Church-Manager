@@ -13,4 +13,4 @@ test('Deve criar um novo batismo', function () {
 
     $response = $this->postJson('api/baptism/create',$data);
     $response->assertStatus(200);
-})->only();
+});

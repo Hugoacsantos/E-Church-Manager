@@ -6,6 +6,7 @@ use App\DTO\AddressDTO;
 use App\Models\Address;
 use App\Models\User;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 
 class AddressService {
 
@@ -48,6 +49,10 @@ class AddressService {
 
     public function findById(string $id): Address {
         return Address::find($id);
+    }
+
+    public function getAll(): Collection {
+        return Address::all();
     }
 
     private function getAddressCount(User $user): int {

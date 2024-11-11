@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Exceptions;
-use PHPUnit\Runner\InvalidOrderException;
 
 test('Deve criar um novo endereço', function () {
 
@@ -114,3 +112,10 @@ test('Nao deve criar mais que o numero maximo de endereço', function() {
     ]);
 
 });
+
+test('Deve listar varios Usuarios', function() {
+
+    $response = $this->get('api/address/');
+
+    $response->assertStatus(200);
+})->only();
