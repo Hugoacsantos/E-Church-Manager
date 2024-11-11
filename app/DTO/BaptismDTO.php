@@ -3,7 +3,6 @@
 namespace App\DTO;
 
 use DateTime;
-use Illuminate\Support\Facades\Date;
 
 class BaptismDTO
 {

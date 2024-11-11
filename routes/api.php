@@ -18,6 +18,7 @@
 
 use App\Http\Controllers\Address\CreateAddressController;
 use App\Http\Controllers\Address\FindAddressController;
+use App\Http\Controllers\Baptism\CreateNewBatismoController;
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\DeleteMemberController;
 use App\Http\Controllers\User\FindUserByIdController;
@@ -47,7 +48,7 @@ Route::prefix('address')->group(function () {
     Route::post('/create',CreateAddressController::class);
 });
 
-// falta testar esses endpoints
+
 Route::prefix('family')->group(function () {
     Route::post('/create', CreateFamilyController::class);
     Route::get('/',GetFamiliesController::class);
@@ -57,10 +58,10 @@ Route::prefix('family')->group(function () {
 });
 
 
-// // Falta testa esses endpoints
-// Route::prefix('batismo')->group(function() {
-//     Route::post('/create',CreateNewBatismoController::class);
-// });
+// Falta testa esses endpoints
+Route::prefix('baptism')->group(function() {
+    Route::post('/create',CreateNewBatismoController::class);
+});
 
 // //Falta testar os endpoints
 // Route::prefix('evento')->group(function() {

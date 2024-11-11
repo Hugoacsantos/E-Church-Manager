@@ -9,7 +9,7 @@ use DateTime;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
-class baptismService {
+class BaptismService {
 
 
     public function create(BaptismDTO $baptismDTO): Baptism {
@@ -20,8 +20,7 @@ class baptismService {
         if(blank($baptismDTO->data_batismo)) {
             $baptismDTO->data_batismo = new DateTime('now');
         }
-        // \dd($baptismDTO->toArray());
-        // $batismo = Batismo::create($baptismDTO->toArray());
+
         $baptism = new Baptism();
         $baptism->data_batismo = $baptismDTO->data_batismo;
         $baptism->membro_id = $baptismDTO->membro_id;
@@ -35,9 +34,8 @@ class baptismService {
         return Baptism::find($id);
     }
 
-    public function findByUserById(int $id) : Collection{
+    public function findByUserById(int $id) : Collection {
        return Baptism::where('membro_id',$id)->first();
-
     }
 
     public function listAll(): Collection {
