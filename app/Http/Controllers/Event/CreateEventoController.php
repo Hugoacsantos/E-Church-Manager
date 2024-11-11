@@ -9,17 +9,12 @@ use App\Services\EventService;
 class CreateEventoController extends Controller
 {
 
-    public function __construct(
-        public EventService $eventService
-    ) {
-
-    }
-
     /**
      * Handle the incoming request.
      */
-    public function __invoke(CreateEventoRequest $request) {
-        $evento = $this->eventService->create($request->toDto());
+    public function __invoke(CreateEventoRequest $request, EventService $eventService) {
+
+        $evento = $eventService->create($request->toDto());
 
         return response()->json($evento);
     }

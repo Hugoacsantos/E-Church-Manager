@@ -5,6 +5,7 @@ use App\Http\Controllers\Address\FindAddressController;
 use App\Http\Controllers\Address\FindByUserController;
 use App\Http\Controllers\Address\GetAddressesController;
 use App\Http\Controllers\Baptism\CreateNewBatismoController;
+use App\Http\Controllers\Event\CreateEventoController;
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\DeleteMemberController;
 use App\Http\Controllers\User\FindUserByIdController;
@@ -31,7 +32,7 @@ Route::prefix('user')->group(function (){
 
 Route::prefix('address')->group(function () {
     Route::get('/',GetAddressesController::class);
-    // Route::get('/{id}',FindAddressController::class);
+    Route::get('/{id}',FindAddressController::class);
     Route::post('/create',CreateAddressController::class);
     Route::get('/findbyuser/{id}', FindByUserController::class);
 });
@@ -50,13 +51,13 @@ Route::prefix('baptism')->group(function() {
     Route::post('/create',CreateNewBatismoController::class);
 });
 
-// //Falta testar os endpoints
-// Route::prefix('evento')->group(function() {
-//     Route::get('/listAll',ListAllEvents::class);
-//     Route::get("/findById/{id}",GetByIdEventController::class);
-//     Route::get('/listOpen',ListEventsOpenController::class);
-//     Route::get('/listClose',ListEventsCloseController::class);
-//     Route::post('/create',CreateEventoController::class);
-//     Route::post('/addmembroevento',AddMembroEventController::class);
-//     Route::post('/removemembro',RemoveMembroEventoController::class);
-// });
+//Falta testar os endpoints
+Route::prefix('event')->group(function() {
+    // Route::get('/listAll',ListAllEvents::class);
+    // Route::get("/findById/{id}",GetByIdEventController::class);
+    // Route::get('/listOpen',ListEventsOpenController::class);
+    // Route::get('/listClose',ListEventsCloseController::class);
+    Route::post('/create',CreateEventoController::class);
+    // Route::post('/addmembroevento',AddMembroEventController::class);
+    // Route::post('/removemembro',RemoveMembroEventoController::class);
+});

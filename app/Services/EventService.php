@@ -23,6 +23,7 @@ class EventService {
         $event->titulo = $eventDTO->titulo;
         $event->descricao = $eventDTO->descricao;
         $event->local = $eventDTO->local;
+        $event->data = $eventDTO->data;
         $event->status = $eventDTO->status;
         $event->save();
 
