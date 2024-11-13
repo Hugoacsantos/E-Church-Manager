@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\DTO\EventDTO;
-use App\DTO\EventoDTO;
 use App\Models\Event;
 use App\Models\EventUser;
 use App\Models\User;
+use DateTime;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -17,7 +17,10 @@ class EventService {
     public function create(EventDTO $eventDTO): Event {
         // Validar a data fazer um evento de pelo menos 30 minutos
         if(empty($eventDTO->status)) {
-            $data['status'] = 'Ativo';
+            $eventDTO->status = 'Ativo';
+        }
+        if($this->dateValidation($eventDTO->data->getTimestamp()) === false) {
+            throw new Exception('A data nao pode ser menor que data atual');
         }
         $event = new Event();
         $event->titulo = $eventDTO->titulo;
@@ -105,6 +108,29 @@ class EventService {
        return Event::find($id);
     }
 
+    private function dateValidation(string $data, $minutosMinimos = 10): bool {
 
+        if (!strtotime($data)) {
+            return [
+                'valido' => false,
+                'mensagem' => 'Data em formato inválido. Use o formato Y-m-d H:i:s'
+            ];
+        }
+
+
+        $dataFornecida = new DateTime($data);
+        $dataAtual = new DateTime();
+
+
+        $diferenca = abs($dataFornecida->getTimestamp() - $dataAtual->getTimestamp()) / 60;
+
+
+        if ($diferenca < $minutosMinimos) {
+            return false;
+        }
+
+        return true;
+
+    }
 
 }
