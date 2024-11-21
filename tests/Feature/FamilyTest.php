@@ -63,7 +63,7 @@ test('Deve remover um usuario da familia', function() {
         'userId' => $familyUser->user_id
     ];
     $response = $this->postJson('api/family/removememberfamily',$data);
-    dd($response->json());
+
 
     $response->assertStatus(200);
-})->only();
+});
