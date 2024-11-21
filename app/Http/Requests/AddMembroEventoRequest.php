@@ -11,7 +11,7 @@ class AddMembroEventoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,7 @@ class AddMembroEventoRequest extends FormRequest
     {
         return [
             'user_id' => 'required',
-            'evento_id' => 'required'
+            'event_id' => 'required'
         ];
     }
 }

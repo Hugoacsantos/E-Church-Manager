@@ -5,7 +5,11 @@ use App\Http\Controllers\Address\FindAddressController;
 use App\Http\Controllers\Address\FindByUserController;
 use App\Http\Controllers\Address\GetAddressesController;
 use App\Http\Controllers\Baptism\CreateNewBatismoController;
+use App\Http\Controllers\Event\AddMembroEventController;
 use App\Http\Controllers\Event\CreateEventoController;
+use App\Http\Controllers\Event\ListAllEvents;
+use App\Http\Controllers\Event\ListEventsCloseController;
+use App\Http\Controllers\Event\ListEventsOpenController;
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\DeleteMemberController;
 use App\Http\Controllers\User\FindUserByIdController;
@@ -53,11 +57,11 @@ Route::prefix('baptism')->group(function() {
 
 //Falta testar os endpoints
 Route::prefix('event')->group(function() {
-    // Route::get('/listAll',ListAllEvents::class);
+    Route::get('/',ListAllEvents::class);
     // Route::get("/findById/{id}",GetByIdEventController::class);
-    // Route::get('/listOpen',ListEventsOpenController::class);
-    // Route::get('/listClose',ListEventsCloseController::class);
+    Route::get('/listOpen',ListEventsOpenController::class);
+    Route::get('/listClose',ListEventsCloseController::class);
     Route::post('/create',CreateEventoController::class);
-    // Route::post('/addmembroevento',AddMembroEventController::class);
+    Route::post('/addmembroevento',AddMembroEventController::class);
     // Route::post('/removemembro',RemoveMembroEventoController::class);
 });

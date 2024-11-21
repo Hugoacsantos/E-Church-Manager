@@ -9,18 +9,13 @@ use Illuminate\Http\Request;
 class ListEventsOpenController extends Controller
 {
 
-    public function __construct(
-        public EventService $eventService
-    ) {
-
-    }
 
     /**
      * Handle the incoming request.
      */
-    public function __invoke() {
+    public function __invoke(EventService $eventService) {
 
-        $data = $this->eventService->eventsOpen();
+        $data = $eventService->eventsOpen();
 
         return \response()->json($data);
     }

@@ -9,17 +9,12 @@ use Illuminate\Http\Request;
 class ListEventsCloseController extends Controller
 {
 
-    public function __construct(
-        public EventService $eventService
-    ) {
-
-    }
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(EventService $eventService)
     {
-        $data = $this->eventService->eventsClose();
+        $data = $eventService->eventsClose();
 
         return \response()->json($data);
     }

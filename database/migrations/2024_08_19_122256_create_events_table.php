@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->string('descricao');
             $table->string('local');
-            $table->date('data');
+            $table->datetime('data_encerramento');
             $table->string('status');
             $table->timestamps();
         });

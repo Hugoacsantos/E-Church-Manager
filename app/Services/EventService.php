@@ -15,7 +15,7 @@ class EventService {
 
 
     public function create(EventDTO $eventDTO): Event {
-        // Validar a data fazer um evento de pelo menos 30 minutos
+
         if(empty($eventDTO->status)) {
             $eventDTO->status = 'Ativo';
         }
@@ -26,7 +26,7 @@ class EventService {
         $event->titulo = $eventDTO->titulo;
         $event->descricao = $eventDTO->descricao;
         $event->local = $eventDTO->local;
-        $event->data = $eventDTO->data;
+        $event->data_encerramento = $eventDTO->data;
         $event->status = $eventDTO->status;
         $event->save();
 
@@ -104,33 +104,26 @@ class EventService {
         return $evento->save();
     }
 
-    public function findById(string $id): Collection {
+    public function findById(string|int $id): ?Event {
        return Event::find($id);
     }
 
-    private function dateValidation(string $data, $minutosMinimos = 10): bool {
+    private function dateValidation(string $data, int $minutosMinimos = 10): true {
 
-        if (!strtotime($data)) {
-            return [
-                'valido' => false,
-                'mensagem' => 'Data em formato inválido. Use o formato Y-m-d H:i:s'
-            ];
+        $dataFornecida = DateTime::createFromFormat('Y-m-d H:i:s', $data);
+
+        if ($dataFornecida === false) {
+            throw new Exception('Data nao passada');
         }
 
-
-        $dataFornecida = new DateTime($data);
         $dataAtual = new DateTime();
-
-
         $diferenca = abs($dataFornecida->getTimestamp() - $dataAtual->getTimestamp()) / 60;
 
-
         if ($diferenca < $minutosMinimos) {
-            return false;
+            throw new Exception("A data nao pode ser no futuro {$minutosMinimos}");
         }
 
         return true;
-
     }
 
 }

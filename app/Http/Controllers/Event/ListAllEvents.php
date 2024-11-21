@@ -8,18 +8,12 @@ use Illuminate\Http\Request;
 
 class ListAllEvents extends Controller
 {
-
-    public function __construct(
-        public EventService $eventService
-    ) {
-
-    }
     /**
      * Handle the incoming request.
      */
-    public function __invoke() {
+    public function __invoke(EventService $eventService) {
 
-        $data = $this->eventService->listAll();
+        $data = $eventService->listAll();
 
         return \response()->json($data);
     }
