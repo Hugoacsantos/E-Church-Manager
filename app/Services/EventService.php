@@ -22,6 +22,7 @@ class EventService {
         if($this->dateValidation($eventDTO->data->getTimestamp()) === false) {
             throw new Exception('A data nao pode ser menor que data atual');
         }
+
         $event = new Event();
         $event->titulo = $eventDTO->titulo;
         $event->descricao = $eventDTO->descricao;
@@ -109,18 +110,18 @@ class EventService {
     }
 
     private function dateValidation(string $data, int $minutosMinimos = 10): true {
-
-        $dataFornecida = DateTime::createFromFormat('Y-m-d H:i:s', $data);
+        // $dataFornecida = DateTime::createFromFormat('Y-m-d H:i:s', $data);
+        $dataFornecida = date('Y-m-d H:i:s', $data);
 
         if ($dataFornecida === false) {
             throw new Exception('Data nao passada');
         }
-
+        $hora = date('H:i:s',$data);
         $dataAtual = new DateTime();
-        $diferenca = abs($dataFornecida->getTimestamp() - $dataAtual->getTimestamp()) / 60;
+        $diferenca = abs(strtotime($hora) - $dataAtual->getTimestamp()) / 60;
 
         if ($diferenca < $minutosMinimos) {
-            throw new Exception("A data nao pode ser no futuro {$minutosMinimos}");
+            throw new Exception("O evento nao pode ter menos de {$minutosMinimos} de duracao");
         }
 
         return true;

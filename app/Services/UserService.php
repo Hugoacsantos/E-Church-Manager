@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\DTO\UserDTO;
 use App\Enum\AppException;
+use App\Models\TypeUser;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;

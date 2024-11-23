@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('type_user', function (Blueprint $table) {
             $table->id();
             $table->string('tipo');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -13,9 +13,8 @@ class DeleteMemberController extends Controller
      */
     public function __invoke(string $id, UserService $userService)
     {
-        // dd($id);
-        $userService->removeMember($id);
 
+        $userService->removeMember($id);
         return response()->json("Usuario removido");
     }
 }

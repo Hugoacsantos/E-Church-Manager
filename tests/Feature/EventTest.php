@@ -1,9 +1,9 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Event;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
@@ -13,7 +13,7 @@ test('Criar um evento com data valida', function () {
         'titulo' => 'Evento 1',
         'descricao' => 'Descricao evento 1',
         'local' => 'Local ficticio evento 1',
-        'data' => now()->format('Y-m-d H:i:s')
+        'data' => now()->addMinutes(10)->format('Y-m-d H:i:s')
     ];
 
     $response = $this->postJson('/api/event/create',$data);
@@ -38,7 +38,7 @@ test('Nao deve criar um novo evento com datas invalidas', function(){
     // $response->dd();
     $response->assertStatus(422);
 
-})->only();
+});
 
 
 test('Listar todos os eventos', function() {

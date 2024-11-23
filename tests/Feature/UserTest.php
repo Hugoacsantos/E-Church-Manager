@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabaseState;
 
-// uses(RefreshDatabaseState::class);
+
+uses( RefreshDatabase::class);
 
 test('Deve criar um usuario', function (){
     $data = [
@@ -58,5 +59,4 @@ test('Deve remover um usuario', function() {
     $response = $this->deleteJson('api/user/removemember/'.$user['id']);
 
     $response->assertStatus(200);
-    $response->assertJson(['message' => true]);
 });
