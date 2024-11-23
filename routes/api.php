@@ -23,7 +23,7 @@ use App\Http\Controllers\Family\GetFamiliaByIdController;
 use App\Http\Controllers\Family\CreateFamilyController;
 use App\Http\Controllers\Family\GetFamiliesController;
 use App\Http\Controllers\Family\RemoveMemberController;
-
+use App\Http\Controllers\Ministry\AddLeaderController;
 use App\Http\Controllers\Ministry\CreateMinistryController;
 
 
@@ -76,4 +76,5 @@ Route::prefix('event')->group(function() {
 
 Route::prefix('ministry')->group(function() {
     Route::post('/create', CreateMinistryController::class);
+    Route::post('addleader', AddLeaderController::class);
 });
