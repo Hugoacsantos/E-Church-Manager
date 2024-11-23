@@ -25,6 +25,25 @@ class MinistryService {
         return $ministry;
     }
 
+    public function addLeader(User $user, Ministry $ministerio): true {
+        $ministryExists = MinistryUser::query()
+                                            ->where('ministerio_id', $ministerio->id)
+                                            ->where('user_id', $user->id)
+                                            ->exists();
+
+        if($ministryExists) {
+            throw new Exception('Usuario ja cadastrado no ministerio');
+        }
+
+        $ministry = new MinistryUser();
+        $ministry->tipo_usuario = 'Lider';
+        $ministry->user_id = $user->id;
+        $ministry->ministerio_id = $ministerio->id;
+        $ministry->status = 'Ativo';
+
+        return $ministry->save();
+    }
+
     public function addMember(User $user, Ministry $ministerio): true {
 
         $ministryExists = MinistryUser::query()

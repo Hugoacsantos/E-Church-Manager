@@ -8,10 +8,7 @@ class MinistryDTO
     public string $descricao;
     public string $status;
 
-    public function __construct(
-        array $data
-    )
-    {
+    public function __construct(array $data) {
         $this->titulo = $data['titulo'];
         $this->descricao = $data['descricao'];
         $this->status = $data['status'];

@@ -4,21 +4,29 @@ use App\Http\Controllers\Address\CreateAddressController;
 use App\Http\Controllers\Address\FindAddressController;
 use App\Http\Controllers\Address\FindByUserController;
 use App\Http\Controllers\Address\GetAddressesController;
+
 use App\Http\Controllers\Baptism\CreateNewBatismoController;
+
 use App\Http\Controllers\Event\AddMembroEventController;
 use App\Http\Controllers\Event\CreateEventoController;
 use App\Http\Controllers\Event\ListAllEvents;
 use App\Http\Controllers\Event\ListEventsCloseController;
 use App\Http\Controllers\Event\ListEventsOpenController;
+
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\DeleteMemberController;
 use App\Http\Controllers\User\FindUserByIdController;
 use App\Http\Controllers\User\GetUsersController;
+
 use App\Http\Controllers\Family\AddMemberInFamiliaController;
 use App\Http\Controllers\Family\GetFamiliaByIdController;
 use App\Http\Controllers\Family\CreateFamilyController;
 use App\Http\Controllers\Family\GetFamiliesController;
 use App\Http\Controllers\Family\RemoveMemberController;
+
+use App\Http\Controllers\Ministry\CreateMinistryController;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -64,4 +72,8 @@ Route::prefix('event')->group(function() {
     Route::post('/create',CreateEventoController::class);
     Route::post('/addmembroevento',AddMembroEventController::class);
     // Route::post('/removemembro',RemoveMembroEventoController::class);
+});
+
+Route::prefix('ministry')->group(function() {
+    Route::post('/create', CreateMinistryController::class);
 });

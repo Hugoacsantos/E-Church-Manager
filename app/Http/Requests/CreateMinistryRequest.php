@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\DTO\MinisterioDTO;
+use App\DTO\MinistryDTO;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateMinisterio extends FormRequest
+class CreateMinistryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,6 +30,6 @@ class CreateMinisterio extends FormRequest
     }
 
     public function toDTO(){
-        return new MinisterioDTO($this->validate());
+        return new MinistryDTO($this->validated());
     }
 }
