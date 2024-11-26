@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
             $table->foreignId('evento_id')->references('id')->on('events');
-            $table->string('status');
             $table->timestamps();
         });
     }

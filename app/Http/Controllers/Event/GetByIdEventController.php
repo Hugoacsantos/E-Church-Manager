@@ -7,18 +7,13 @@ use App\Services\EventService;
 
 class GetByIdEventController extends Controller
 {
-    public function __construct(
-        public EventService $eventService
-    ) {
-
-    }
 
     /**
      * Handle the incoming request.
      */
-    public function __invoke(string $id)
+    public function __invoke(string $id, EventService $eventService)
     {
-        $event = $this->eventService->findById($id);
+        $event = $eventService->findById($id);
 
         return \response()->json($event);
     }

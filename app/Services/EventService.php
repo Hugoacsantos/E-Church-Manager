@@ -38,15 +38,18 @@ class EventService {
         return Event::all();
     }
 
-    public function addMember(User $user, Event $evento): true {
+    public function addMember(User $user, Event $evento): EventUser {
         if($evento->status === 'fechado') {
             throw new Exception('Nao foi possivel associar membro a evento devido ao evento esta fechado');
         }
+
 
         $userEvento = EventUser::query()
                                 ->where('evento_id', $evento->id)
                                 ->where('user_id', $user->id)
                                 ->exists();
+
+
 
         if($userEvento) {
             throw new Exception('Usuario ja esta no evento');
@@ -55,28 +58,23 @@ class EventService {
         $eventUser = new EventUser();
         $eventUser->user_id = $user->id;
         $eventUser->evento_id = $evento->id;
+        $eventUser->save();
 
-        return $evento->save();
+        return $eventUser;
     }
 
     public function removeMember(User $user, Event $evento): true {
 
         if($evento->status === 'fechado') {
-            throw new Exception('Nao foi possivel associar membro a evento devido ao evento esta fechado');
+            throw new Exception('Nao e possivel remover membro de evento ja fechado');
         }
-
+        // $ue = EventUser::all();
         $userEvento = EventUser::query()
                                 ->where('evento_id', $evento->id)
                                 ->where('user_id', $user->id)
-                                ->get();
-
-        // if($userEvento === false) {
-        //     throw new Exception('Usuario ja esta no evento');
-        // }
-
-        // $userEvento->delete();
-
-        return $userEvento->delete();
+                                ->first();
+        $userEvento->delete();
+        return true;
     }
 
     public function eventsOpen(): Collection {

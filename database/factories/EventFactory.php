@@ -21,7 +21,8 @@ class EventFactory extends Factory
             'descricao' => $this->faker->paragraph,
             'local' => $this->faker->address,
             'data_encerramento' => $this->faker->dateTimeBetween('now', '+30 minutes')->format('Y-m-d'),
-            'status' => $this->faker->randomElement(['ativo', 'cancelado', 'pendente']),
+            'status' => 'ativo',
+            // 'status' => $this->faker->randomElement(['ativo', 'fechado', 'cancelado']),
         ];
     }
 }

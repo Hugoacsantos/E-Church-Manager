@@ -83,3 +83,43 @@ test('Deve adicionar usuario no evento', function() {
 
     $response->assertStatus(200);
 });
+
+test('Deve remover usuario no evento', function() {
+
+    $event = Event::factory()->create();
+    $user = User::factory()->create();
+
+
+    $data = [
+        'user_id' => $user->id,
+        'event_id' => $event->id
+    ];
+
+    $response = $this->postJson('api/event/addmembroevento',$data);
+    $data2 = $response->getContent();
+
+    $response1 = $this->postJson('api/event/removemembro',$data);
+
+
+    $response1->assertStatus(200);
+});
+
+
+
+test('Deve encontrar um evento por ID', function() {
+
+    $event = Event::factory()->create();
+
+    $response = $this->getJson('api/event/findById/'.$event->id);
+
+    $response->assertStatus(200);
+});
+
+test('Não deve encontrar um evento por ID', function() {
+
+    $event_id = '';
+
+    $response = $this->getJson('api/event/findById/'.$event_id);
+
+    $response->assertStatus(404);
+});

@@ -9,10 +9,11 @@ use App\Http\Controllers\Baptism\CreateNewBatismoController;
 
 use App\Http\Controllers\Event\AddMembroEventController;
 use App\Http\Controllers\Event\CreateEventoController;
+use App\Http\Controllers\Event\GetByIdEventController;
 use App\Http\Controllers\Event\ListAllEvents;
 use App\Http\Controllers\Event\ListEventsCloseController;
 use App\Http\Controllers\Event\ListEventsOpenController;
-
+use App\Http\Controllers\Event\RemoveMembroEventoController;
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\DeleteMemberController;
 use App\Http\Controllers\User\FindUserByIdController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Family\GetFamiliaByIdController;
 use App\Http\Controllers\Family\CreateFamilyController;
 use App\Http\Controllers\Family\GetFamiliesController;
 use App\Http\Controllers\Family\RemoveMemberController;
+
 use App\Http\Controllers\Ministry\AddLeaderController;
 use App\Http\Controllers\Ministry\CreateMinistryController;
 
@@ -66,12 +68,12 @@ Route::prefix('baptism')->group(function() {
 //Falta testar os endpoints
 Route::prefix('event')->group(function() {
     Route::get('/',ListAllEvents::class);
-    // Route::get("/findById/{id}",GetByIdEventController::class);
+    Route::get("/findById/{id}",GetByIdEventController::class);
     Route::get('/listOpen',ListEventsOpenController::class);
     Route::get('/listClose',ListEventsCloseController::class);
     Route::post('/create',CreateEventoController::class);
     Route::post('/addmembroevento',AddMembroEventController::class);
-    // Route::post('/removemembro',RemoveMembroEventoController::class);
+    Route::post('/removemembro',RemoveMembroEventoController::class);
 });
 
 Route::prefix('ministry')->group(function() {
