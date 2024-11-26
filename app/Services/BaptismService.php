@@ -13,6 +13,7 @@ class BaptismService {
 
 
     public function create(BaptismDTO $baptismDTO): Baptism {
+
         if( $this->isBaptism($baptismDTO->membro_id) ===true) {
             throw new Exception('Usuario ja é batizado');
         }
@@ -30,13 +31,17 @@ class BaptismService {
         return $baptism;
     }
 
-    public function findById(int $id) : Baptism {
+    public function findById(int|string $id) : Baptism {
         return Baptism::find($id);
     }
 
-    public function findByUserById(int $id) : Collection {
+    public function findByUserById(int|string $id) : Baptism {
        return Baptism::where('membro_id',$id)->first();
     }
+
+    public function findByBaptizerById(int|string $id) : Collection {
+        return Baptism::where('batizado_por',$id)->get();
+     }
 
     public function listAll(): Collection {
         return Baptism::all();
@@ -44,7 +49,11 @@ class BaptismService {
 
     private function isBaptism(string $userId): bool {
         $user = User::find($userId);
-        $ifBaptism = $user->baptism()->count();
+
+        $ifBaptism = Baptism::query()
+                                ->where('membro_id',$userId)
+                                ->first();
+
         if($ifBaptism > 0) {
             return true;
         }

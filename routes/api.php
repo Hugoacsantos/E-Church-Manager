@@ -6,7 +6,9 @@ use App\Http\Controllers\Address\FindByUserController;
 use App\Http\Controllers\Address\GetAddressesController;
 
 use App\Http\Controllers\Baptism\CreateNewBatismoController;
-
+use App\Http\Controllers\Baptism\GetBaptismByBaptizerIdController;
+use App\Http\Controllers\Baptism\GetBaptismByIdController;
+use App\Http\Controllers\Baptism\GetBaptismByUserIdController;
 use App\Http\Controllers\Event\AddMembroEventController;
 use App\Http\Controllers\Event\CreateEventoController;
 use App\Http\Controllers\Event\GetByIdEventController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\Event\ListAllEvents;
 use App\Http\Controllers\Event\ListEventsCloseController;
 use App\Http\Controllers\Event\ListEventsOpenController;
 use App\Http\Controllers\Event\RemoveMembroEventoController;
+
 use App\Http\Controllers\User\CreateUserController;
 use App\Http\Controllers\User\DeleteMemberController;
 use App\Http\Controllers\User\FindUserByIdController;
@@ -62,7 +65,10 @@ Route::prefix('family')->group(function () {
 
 
 Route::prefix('baptism')->group(function() {
+    Route::get('/{id}', GetBaptismByIdController::class);
     Route::post('/create',CreateNewBatismoController::class);
+    Route::get('/member/{id}', GetBaptismByUserIdController::class);
+    Route::get('/baptizer/{id}', GetBaptismByBaptizerIdController::class);
 });
 
 //Falta testar os endpoints
