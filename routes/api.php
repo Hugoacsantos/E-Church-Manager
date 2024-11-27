@@ -4,7 +4,7 @@ use App\Http\Controllers\Address\CreateAddressController;
 use App\Http\Controllers\Address\FindAddressController;
 use App\Http\Controllers\Address\FindByUserController;
 use App\Http\Controllers\Address\GetAddressesController;
-
+use App\Http\Controllers\Announcements\CreateController;
 use App\Http\Controllers\Baptism\CreateNewBatismoController;
 use App\Http\Controllers\Baptism\GetBaptismByBaptizerIdController;
 use App\Http\Controllers\Baptism\GetBaptismByIdController;
@@ -85,4 +85,8 @@ Route::prefix('event')->group(function() {
 Route::prefix('ministry')->group(function() {
     Route::post('/create', CreateMinistryController::class);
     Route::post('addleader', AddLeaderController::class);
+});
+
+Route::prefix('aviso')->group(function() {
+    Route::post('/create', CreateController::class);
 });
