@@ -2,17 +2,17 @@ Funcionalidades Detalhadas para um Sistema de Gestão de Igreja
 1. Cadastro e Gerenciamento de Membros
 
     Cadastro de Membros:
-        Informações pessoais (nome, endereço, telefone, e-mail, data de nascimento)
-        Estado civil e informações familiares
-        Data de batismo e filiação
-        Histórico de participação em eventos e ministérios
-        Anexar fotos e documentos
+        Informações pessoais (nome, endereço, telefone, e-mail, data de nascimento) - Feito
+        Estado civil e informações familiares - Feito
+        Data de batismo e filiação - Não
+        Histórico de participação em eventos e ministérios - Não
+        Anexar fotos e documentos - Não
     Atualização e Exclusão de Membros:
-        Editar e remover informações dos membros
+        Editar e remover informações dos membros - Feito
     Busca e Filtragem:
-        Buscar membros por nome, grupo, ou outros critérios
+        Buscar membros por nome, grupo, ou outros critérios - Parcialmente feito
     Histórico de Comunicações:
-        Registro de chamadas, e-mails e interações
+        Registro de chamadas, e-mails e interações - Não
 
 2. Gerenciamento de Eventos
 
