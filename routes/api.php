@@ -27,7 +27,7 @@ use App\Http\Controllers\Family\GetFamiliaByIdController;
 use App\Http\Controllers\Family\CreateFamilyController;
 use App\Http\Controllers\Family\GetFamiliesController;
 use App\Http\Controllers\Family\RemoveMemberController;
-
+use App\Http\Controllers\FeedBack\CreateFeedbackController;
 use App\Http\Controllers\Ministry\AddLeaderController;
 use App\Http\Controllers\Ministry\CreateMinistryController;
 
@@ -89,4 +89,8 @@ Route::prefix('ministry')->group(function() {
 
 Route::prefix('aviso')->group(function() {
     Route::post('/create', CreateController::class);
+});
+
+Route::prefix('feedback')->group(function() {
+    Route::post('/create', CreateFeedbackController::class);
 });
