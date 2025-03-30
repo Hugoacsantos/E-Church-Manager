@@ -19,7 +19,7 @@ class UserService {
         }
         $user = new User();
         $user->name = $userDTO->name;
-        $user->email = $userDTO->name;
+        $user->email = $userDTO->email;
         $user->password = $userDTO->password;
         $user->save();
 
