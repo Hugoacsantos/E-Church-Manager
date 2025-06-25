@@ -13,19 +13,34 @@ test('Deve criar um usuario', function (){
         'password' => fake()->regexify('[A-Z]{5}[0-4]{3}')
     ];
 
-    $response = $this->postJson('/api/user/create',$data);
-    // dump($response);
+    $response = $this->postJson('/api/users/create',$data);
+    dump($response->getData());
 
     $response->assertStatus(200);
 });
 
-test('Deve Retornar varios usuarios', function(){
-    $response = $this->get('api/user');
+test('Deve Retornar uma lista de varios usuarios', function(){
+
+    $data = [
+        'name' => fake()->name(),
+        'email' => fake()->email(),
+        'password' => fake()->regexify('[A-Z]{5}[0-4]{3}')
+    ];
+
+    $response1 = $this->postJson('/api/users/create',$data);
+
+
+
+
+    $response = $this->get('api/users');
     // dd($response->getData());
+
+
     $response->assertStatus(200);
-    // $data = json_decode($response->getContent(), true);
-    // $this->assertNotEmpty($data);
-});
+    // dd(count($response->json()));
+    expect($response->json())->not()->toBeEmpty();
+
+})->only();
 
 test('deve encontrar por id um usuario', function() {
     $data = [
