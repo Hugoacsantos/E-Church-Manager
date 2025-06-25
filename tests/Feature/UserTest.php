@@ -58,14 +58,14 @@ test('deve encontrar por id um usuario', function() {
     $user = $response1->json();
     $response = $this->get('/api/users/'.$user['id']);
     $userData = $response->json();
-    dump($userData);
+
     expect($userData)->not()->toBeEmpty();
     expect($userData)->toBeArray();
     expect($userData)->toHaveCount(7);
     expect($userData)->toHaveKey('id');
     $response->assertStatus(200);
 
-})->only();
+});
 
 test('Deve remover um usuario', function() {
 
@@ -75,10 +75,10 @@ test('Deve remover um usuario', function() {
         'password' => fake()->regexify('[A-Z]{5}[0-4]{3}')
     ];
 
-    $response1 = $this->postJson('/api/user/create',$data);
+    $response1 = $this->postJson('/api/users/create',$data);
     $user = $response1->json();
 
-    $response = $this->deleteJson('api/user/removemember/'.$user['id']);
+    $response = $this->deleteJson('api/users/removemember/'.$user['id']);
 
     $response->assertStatus(200);
 });
