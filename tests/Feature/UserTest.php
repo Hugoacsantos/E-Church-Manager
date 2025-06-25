@@ -14,9 +14,13 @@ test('Deve criar um usuario', function (){
     ];
 
     $response = $this->postJson('/api/users/create',$data);
-    dump($response->getData());
+
+    
+    expect($response->json()['id'])->toEqual(1);
+    expect($response->json())->toHaveKeys(['name','email','id']);
 
     $response->assertStatus(200);
+
 });
 
 test('Deve Retornar uma lista de varios usuarios', function(){
@@ -40,7 +44,7 @@ test('Deve Retornar uma lista de varios usuarios', function(){
     // dd(count($response->json()));
     expect($response->json())->not()->toBeEmpty();
 
-})->only();
+});
 
 test('deve encontrar por id um usuario', function() {
     $data = [
