@@ -9,18 +9,14 @@ use Illuminate\Http\Request;
 class FindUserByIdController extends Controller
 {
 
-    public function __construct(
-        public UserService $userService
-    ){
-
-    }
     /**
      * Handle the incoming request.
+     * Encontra usuario por id.
      */
-    public function __invoke(Request $request,string $id)
+    public function __invoke(string $id, UserService $userService)
     {
 
-        $user = $this->userService->findById($id);
+        $user = $userService->findById($id);
 
         return \response()->json($user);
     }
