@@ -10,11 +10,10 @@ class GetUsersController extends Controller
 {
     /**
      * Handle the incoming request.
+     * Retorna todos os usuarios.
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, UserService $userServices)
     {
-
-        $userServices = new UserService;
         $user = $userServices->getAll();
 
         return \response()->json($user);

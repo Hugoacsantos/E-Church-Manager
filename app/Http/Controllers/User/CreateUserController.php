@@ -11,17 +11,13 @@ use App\Services\UserService;
 class CreateUserController extends Controller
 {
 
-    public function __construct(
-        public UserService $userService,
-        public TypeUserService $typeUserService
-    ){}
-
     /**
      * Handle the incoming request.
+     * Cria um novo usuario 
      */
-    public function __invoke(CreateUserRequest $request) {
-        $user = $this->userService->create($request->toDTO());
-        $this->typeUserService->add($user->id);
+    public function __invoke(CreateUserRequest $request, UserService $userService, TypeUserService $typeUserService) {
+        $user = $userService->create($request->toDTO());
+        $typeUserService->add($user->id);
 
         return \response()->json($user);
     }
