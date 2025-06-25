@@ -40,7 +40,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::prefix('user')->group(function (){
+Route::prefix('users')->group(function (){
     Route::get('/',GetUsersController::class);
     Route::post('/create',CreateUserController::class);
     Route::get('/{id}',FindUserByIdController::class);
