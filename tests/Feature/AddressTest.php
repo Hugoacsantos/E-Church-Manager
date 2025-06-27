@@ -26,8 +26,14 @@ test('Deve criar um novo endereço', function () {
         'bairro' => 'Centro'
     ];
 
-    $response = $this->postJson('/api/address/create',$data2);
+    $response = $this->postJson('/api/addresses/create',$data2);
+    $address = $response->json();
+    dump($response->json());
 
+    expect($address)->toBeArray();
+    expect($address)->not()->toBeEmpty();
+    expect($address)->toHaveCount(9);
+    expect($address)->toHaveKeys(['rua','numero','complemento','bairro','cidade','id']);
     $response->assertStatus(200);
 });
 
