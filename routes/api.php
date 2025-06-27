@@ -47,7 +47,7 @@ Route::prefix('users')->group(function (){
     Route::delete('/removemember/{id}', DeleteMemberController::class);
 });
 
-Route::prefix('address')->group(function () {
+Route::prefix('addresses')->group(function () {
     Route::get('/',GetAddressesController::class);
     Route::get('/{id}',FindAddressController::class);
     Route::post('/create',CreateAddressController::class);
