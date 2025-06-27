@@ -69,7 +69,7 @@ test('Deve encontar um endereço', function () {
         'password' => fake()->regexify('[A-Z]{5}[0-4]{3}')
     ];
 
-    $response1 = $this->postJson('/api/user/create',$data);
+    $response1 = $this->postJson('/api/users/create',$data);
     $user = $response1->getData();
 
     $data = [
@@ -80,13 +80,21 @@ test('Deve encontar um endereço', function () {
         'bairro' => 'Centro'
     ];
 
-    $response = $this->postJson('/api/address/create',$data);
-    $idAddress = $response->json()['id'];
+    $response = $this->postJson('/api/addresses/create',$data);
+    $idAddress = $response->json();
 
-    $response1 = $this->get('/api/address/'.$idAddress);
+    $response1 = $this->get('/api/addresses/'.$idAddress['id']);
+    $addressses = $response1->json();
+    dump($response1->json());
+
+    expect($addressses)->toBeArray();
+    expect($addressses)->not()->toBeEmpty();
+    expect($addressses)->toHaveCount(10);
+    expect($addressses)->toHaveKeys(['rua','numero','complemento','bairro','cidade','id']);
+
 
     $response1->assertStatus(200);
-});
+})->only();
 
 test('Nao deve criar mais que o numero maximo de endereço', function() {
 
