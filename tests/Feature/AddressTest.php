@@ -94,7 +94,7 @@ test('Deve encontar um endereço', function () {
 
 
     $response1->assertStatus(200);
-})->only();
+});
 
 test('Nao deve criar mais que o numero maximo de endereço', function() {
 
@@ -135,10 +135,11 @@ test('Nao deve criar mais que o numero maximo de endereço', function() {
 
 test('Deve listar varios Usuarios', function() {
 
-    $response = $this->get('api/address/');
-
+    $response = $this->get('api/addresses/');
+    dump($response->json());
     $response->assertStatus(200);
-});
+    
+})->only();
 
 test('Deve retornar um ou mais endereço', function() {
     $user = User::factory()->create();
