@@ -9,7 +9,22 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(RefreshDatabase::class);
 
 test('Deve trazer varias familias', function () {
-    $response = $this->get('/api/family/');
+    $data = [
+        'name' => fake()->name()
+    ];
+
+    $responseFamilyCreated = $this->postJson('api/families/', $data);
+
+    $response = $this->getJson('/api/families/');
+    $families = $response->json();
+
+    // expect(count($families));
+    expect($families)->toBeArray()->toBeGreaterThanOrEqual(1);
+    // expect($families[0])->toHaveKeys(['id','nomefamilia','status']);
+    expect($families)->each()->toHaveCount(5)->toHaveKeys(['id','nomefamilia','status',]);
+    // expect($families)->each()->toHaveKeys(['id','nomefamilia','status']);
+    // expect($families)->sequence(fn ($family) => ->not()->toBeEmpty());
+
 
     $response->assertStatus(200);
 });
@@ -22,8 +37,7 @@ test('Deve criar uma familia', function() {
 
     $response = $this->postJson('api/families/', $data);
     $familiesResponse = $response->json();
-    dump($familiesResponse);
-    dump(count($familiesResponse));
+
 
     expect($familiesResponse)->not()->toBeEmpty();
     expect($familiesResponse)->toHaveCount(5);
