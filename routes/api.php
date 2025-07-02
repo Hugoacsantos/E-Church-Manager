@@ -42,21 +42,22 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('users')->group(function (){
     Route::get('/',GetUsersController::class);
-    Route::post('/create',CreateUserController::class);
+    Route::post('/',CreateUserController::class);
     Route::get('/{id}',FindUserByIdController::class);
-    Route::delete('/removemember/{id}', DeleteMemberController::class);
+    Route::delete('/{id}', DeleteMemberController::class);
 });
 
 Route::prefix('addresses')->group(function () {
     Route::get('/',GetAddressesController::class);
+    Route::get('/user/{id}', FindByUserController::class);
     Route::get('/{id}',FindAddressController::class);
-    Route::post('/create',CreateAddressController::class);
-    Route::get('/findbyuser/{id}', FindByUserController::class);
+    Route::post('/',CreateAddressController::class);
+    
 });
 
 
-Route::prefix('family')->group(function () {
-    Route::post('/create', CreateFamilyController::class);
+Route::prefix('families')->group(function () {
+    Route::post('/', CreateFamilyController::class);
     Route::get('/',GetFamiliesController::class);
     Route::get('/{id}', GetFamiliaByIdController::class);
     Route::post('/addmemberfamily',AddMemberInFamiliaController::class);
