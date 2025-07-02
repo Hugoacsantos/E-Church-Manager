@@ -20,8 +20,18 @@ test('Deve criar uma familia', function() {
         'name' => fake()->name()
     ];
 
-    $response = $this->postJson('api/family/create', $data);
+    $response = $this->postJson('api/families/', $data);
+    $familiesResponse = $response->json();
+    dump($familiesResponse);
+    dump(count($familiesResponse));
 
+    expect($familiesResponse)->not()->toBeEmpty();
+    expect($familiesResponse)->toHaveCount(5);
+    expect($familiesResponse)->toMatchArray([
+        'nomefamilia' => $data['name'],
+        'status' => 'Ativo',
+    ]);
+    expect($familiesResponse['id'])->not()->ToBeEmpty();
 
     $response->assertStatus(200);
 });
