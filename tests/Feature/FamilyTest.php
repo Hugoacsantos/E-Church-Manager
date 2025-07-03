@@ -3,7 +3,6 @@
 use App\Models\Family;
 use App\Models\FamilyUser;
 use App\Models\User;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
@@ -69,6 +68,21 @@ test('Deve adicionar um membro a uma familia existente',function(){
     $response1->assertStatus(200);
 });
 
+test('Deve remover um usuario da familia', function() {
+
+    $familyUser = FamilyUser::factory()->create();
+
+    $data2 = [
+        'userId' => $familyUser['user_id']
+    ];
+
+    $response1 = $this->deleteJson("api/families/{$familyUser['id']}/members",$data2);
+
+
+    $response1->assertStatus(200);
+});
+
+
 test('Deve pegar uma familia por id', function() {
     $data = Family::factory()->create();
 
@@ -81,15 +95,4 @@ test('Deve pegar uma familia por id', function() {
     $response->assertStatus(200);
 });
 
-test('Deve remover um usuario da familia', function() {
-    $familyUser = FamilyUser::factory()->create();
 
-    $data = [
-        'familyId' => $familyUser->family_id,
-        'userId' => $familyUser->user_id
-    ];
-    $response = $this->postJson('api/family/removememberfamily',$data);
-
-
-    $response->assertStatus(200);
-});
