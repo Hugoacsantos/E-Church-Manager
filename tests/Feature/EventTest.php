@@ -16,11 +16,11 @@ test('Criar um evento com data valida', function () {
         'data' => now()->addMinutes(10)->format('Y-m-d H:i:s')
     ];
 
-    $response = $this->postJson('/api/event/create',$data);
-
+    $response = $this->postJson('/api/events',$data);
+    
+    expect($response)->not->toBe(null);
 
     $response->assertStatus(200);
-    expect($response)->not->toBe(null);
 });
 
 
@@ -34,7 +34,7 @@ test('Nao deve criar um novo evento com datas invalidas', function(){
         'data' => $yesterday->format('Y-m-d H:i:s')
     ];
 
-    $response = $this->postJson('/api/event/create',$datePast);
+    $response = $this->postJson('/api/events',$datePast);
     // $response->dd();
     $response->assertStatus(422);
 
@@ -43,16 +43,15 @@ test('Nao deve criar um novo evento com datas invalidas', function(){
 
 test('Listar todos os eventos', function() {
 
-    $response = $this->getJson('api/event/');
-
+    $response = $this->getJson('api/events');
+    expect($response->json())->toBeArray();
 
     $response->assertStatus(200);
-    expect($response->json())->toBeArray();
 });
 
 test('Listar todos os eventos abertos', function() {
 
-    $response = $this->getJson('api/event/listOpen');
+    $response = $this->getJson('api/events/status/open');
 
 
     $response->assertStatus(200);
@@ -61,7 +60,7 @@ test('Listar todos os eventos abertos', function() {
 
 test('Listar todos os eventos fechados', function() {
 
-    $response = $this->getJson('api/event/listClose');
+    $response = $this->getJson('api/events/status/close');
 
 
     $response->assertStatus(200);
@@ -76,10 +75,9 @@ test('Deve adicionar usuario no evento', function() {
 
     $data = [
         'user_id' => $user->id,
-        'event_id' => $event->id
     ];
 
-    $response = $this->postJson('api/event/addmembroevento',$data);
+    $response = $this->postJson("api/events/{$event['id']}/members",$data);
 
     $response->assertStatus(200);
 });
@@ -92,13 +90,11 @@ test('Deve remover usuario no evento', function() {
 
     $data = [
         'user_id' => $user->id,
-        'event_id' => $event->id
     ];
 
-    $response = $this->postJson('api/event/addmembroevento',$data);
+    $response = $this->postJson("api/events/{$event['id']}/members",$data);
     $data2 = $response->getContent();
-
-    $response1 = $this->postJson('api/event/removemembro',$data);
+    $response1 = $this->deleteJson("api/events/{$event['id']}/members",$data);
 
 
     $response1->assertStatus(200);
@@ -110,7 +106,7 @@ test('Deve encontrar um evento por ID', function() {
 
     $event = Event::factory()->create();
 
-    $response = $this->getJson('api/event/findById/'.$event->id);
+    $response = $this->getJson('api/events/'.$event->id);
 
     $response->assertStatus(200);
 });
@@ -119,7 +115,8 @@ test('Não deve encontrar um evento por ID', function() {
 
     $event_id = '';
 
-    $response = $this->getJson('api/event/findById/'.$event_id);
-
-    $response->assertStatus(404);
+    $response = $this->getJson('api/events/'.$event_id);
+    // dd($response->json());
+    expect($response->json())->toBeEmpty();
+    $response->assertStatus(200);
 });

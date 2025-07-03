@@ -73,14 +73,14 @@ Route::prefix('baptism')->group(function() {
 });
 
 //Falta testar os endpoints
-Route::prefix('event')->group(function() {
+Route::prefix('events')->group(function() {
     Route::get('/',ListAllEvents::class);
-    Route::get("/findById/{id}",GetByIdEventController::class);
-    Route::get('/listOpen',ListEventsOpenController::class);
-    Route::get('/listClose',ListEventsCloseController::class);
-    Route::post('/create',CreateEventoController::class);
-    Route::post('/addmembroevento',AddMembroEventController::class);
-    Route::post('/removemembro',RemoveMembroEventoController::class);
+    Route::get("/{id}",GetByIdEventController::class);
+    Route::get('/status/open',ListEventsOpenController::class);
+    Route::get('/status/close',ListEventsCloseController::class);
+    Route::post('/',CreateEventoController::class);
+    Route::post('/{eventId}/members',AddMembroEventController::class);
+    Route::delete('/{eventId}/members',RemoveMembroEventoController::class);
 });
 
 Route::prefix('ministry')->group(function() {

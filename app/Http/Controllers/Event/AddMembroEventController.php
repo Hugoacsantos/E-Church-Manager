@@ -15,10 +15,10 @@ class AddMembroEventController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(AddMembroEventoRequest $request, EventService $eventService, UserService $userService) {
-        $data =  $request->only(['user_id','event_id']);
+    public function __invoke(AddMembroEventoRequest $request, string $eventId, EventService $eventService, UserService $userService) {
+        $data =  $request->validated();
 
-        $event_id = $eventService->findById($data['event_id']);
+        $event_id = $eventService->findById($eventId);
 
         if(!$event_id) {
             throw new Exception('Evento nao existe');
