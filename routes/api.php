@@ -61,7 +61,7 @@ Route::prefix('families')->group(function () {
     Route::get('/',GetFamiliesController::class);
     Route::get('/{id}', GetFamiliaByIdController::class);
     Route::post('/{id}/members',AddMemberInFamiliaController::class);
-    Route::delete('/{id}/member', RemoveMemberController::class);
+    Route::delete('/{id}/members', RemoveMemberController::class);
 });
 
 
