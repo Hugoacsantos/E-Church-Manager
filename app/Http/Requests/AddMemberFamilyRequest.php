@@ -24,7 +24,6 @@ class AddMemberFamilyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'familyId' => 'required',
             'userId' => 'required'
         ];
     }
