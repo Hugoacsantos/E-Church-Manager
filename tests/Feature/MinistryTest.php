@@ -13,7 +13,7 @@ test('Deve criar um novo ministerio', function () {
         'descricao' => 'Alguma descricao legal',
         'status' => 'nullable'
     ];
-    $response = $this->postJson('api/ministry/create',$data);
+    $response = $this->postJson('api/ministries',$data);
 
     $response->assertStatus(200);
 });
@@ -23,14 +23,14 @@ test('Nao deve criar um novo ministerio com dados incorreto', function() {
         'descricao' => 'Alguma descricao legal',
         'status' => 'nullable'
     ];
-    $response = $this->postJson('api/ministry/create',$data);
+    $response = $this->postJson('api/ministries',$data);
 
     $data1 = [
         'titulo' => 1,
         'descricao' => 'Alguma descricao legal',
         'status' => 'nullable'
     ];
-    $response1 = $this->postJson('api/ministry/create',$data1);
+    $response1 = $this->postJson('api/ministries',$data1);
 
 
     $response->assertStatus(422);
@@ -46,7 +46,7 @@ test('Deve adicionar um novo lider', function(){
         'ministry_id' => $ministry->id
     ];
 
-    $response = $this->postJson('api/ministry/addleader',$data);
+    $response = $this->postJson("api/ministries/{$data['ministry_id']}/members",$data);
 
     $response->assertStatus(200);
 });

@@ -83,9 +83,9 @@ Route::prefix('events')->group(function() {
     Route::delete('/{eventId}/members',RemoveMembroEventoController::class);
 });
 
-Route::prefix('ministry')->group(function() {
-    Route::post('/create', CreateMinistryController::class);
-    Route::post('addleader', AddLeaderController::class);
+Route::prefix('ministries')->group(function() {
+    Route::post('/', CreateMinistryController::class);
+    Route::post('/{ministryId}/members', AddLeaderController::class);
 });
 
 Route::prefix('aviso')->group(function() {
