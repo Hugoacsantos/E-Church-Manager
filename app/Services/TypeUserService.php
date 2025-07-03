@@ -8,14 +8,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 class TypeUserService {
 
-    public function add(string $userId, EnumTypeUser $typeUser = EnumTypeUser::VISITANTE): TypeUser {
-
-        $new = new TypeUser();
-        $new->user_id = $userId;
-        $new->tipo = $typeUser->value;
-        $new->save();
-        return $new;
-    }
 
     public function findById(string $id) : Collection {
         return TypeUser::find($id)->get();

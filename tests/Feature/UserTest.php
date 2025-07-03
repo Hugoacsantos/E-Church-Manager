@@ -15,11 +15,12 @@ test('Deve criar um usuario', function (){
 
     $response = $this->postJson('/api/users',$data);
 
+    $user = $response->json();
     
-    expect($response->json()['id'])->toEqual(1);
-    expect($response->json())->toHaveKeys(['name','email','id']);
+    expect($user['id'])->toEqual(1);
+    expect($user)->toHaveKeys(['name','email','id']);
 
-    $response->assertStatus(200);
+    $response->assertStatus(201);
 
 });
 
@@ -31,18 +32,15 @@ test('Deve Retornar uma lista de varios usuarios', function(){
         'password' => fake()->regexify('[A-Z]{5}[0-4]{3}')
     ];
 
-    $response1 = $this->postJson('/api/users',$data);
+    $this->postJson('/api/users',$data);
 
+    $response = $this->get('api/users?page=2&per_page=30');
+    $users = $response->json();
 
-
-
-    $response = $this->get('api/users');
-    // dd($response->getData());
-
-
+    expect($users)->not()->toBeEmpty();
+    expect($users['data'])->each()->toHaveKeys(['id','name','email']);
+    expect(count($users['data']))->not()->toBeGreaterThanOrEqual(1);
     $response->assertStatus(200);
-    // dd(count($response->json()));
-    expect($response->json())->not()->toBeEmpty();
 
 });
 
