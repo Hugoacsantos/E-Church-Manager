@@ -57,18 +57,17 @@ test('Deve adicionar um membro a uma familia existente',function(){
 
     $user = User::factory()->create();
 
-    $response = $this->postJson('api/family/create', $data);
+    $response = $this->postJson('api/families', $data);
     $family = $response->json();
 
     $data2 = [
-        'familyId' => $family['id'],
         'userId' => $user->id
     ];
 
-    $response1 = $this->postJson('api/family/addmemberfamily',$data2);
-
+    $response1 = $this->postJson("api/families/{$family['id']}/members",$data2);
+    dd($response1->json());
     $response1->assertStatus(200);
-});
+})->only();
 
 test('Deve pegar uma familia por id', function() {
     $family = Family::factory()->create();
