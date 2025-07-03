@@ -13,7 +13,7 @@ test('Deve criar um usuario', function (){
         'password' => fake()->regexify('[A-Z]{5}[0-4]{3}')
     ];
 
-    $response = $this->postJson('/api/users/create',$data);
+    $response = $this->postJson('/api/users',$data);
 
     
     expect($response->json()['id'])->toEqual(1);
@@ -31,7 +31,7 @@ test('Deve Retornar uma lista de varios usuarios', function(){
         'password' => fake()->regexify('[A-Z]{5}[0-4]{3}')
     ];
 
-    $response1 = $this->postJson('/api/users/create',$data);
+    $response1 = $this->postJson('/api/users',$data);
 
 
 
@@ -54,7 +54,7 @@ test('deve encontrar por id um usuario', function() {
     ];
     
 
-    $response1 = $this->postJson('/api/users/create',$data);
+    $response1 = $this->postJson('/api/users',$data);
     $user = $response1->json();
     $response = $this->get('/api/users/'.$user['id']);
     $userData = $response->json();
@@ -75,10 +75,10 @@ test('Deve remover um usuario', function() {
         'password' => fake()->regexify('[A-Z]{5}[0-4]{3}')
     ];
 
-    $response1 = $this->postJson('/api/users/create',$data);
+    $response1 = $this->postJson('/api/users',$data);
     $user = $response1->json();
 
-    $response = $this->deleteJson('api/users/removemember/'.$user['id']);
+    $response = $this->deleteJson('api/users/'.$user['id']);
 
     $response->assertStatus(200);
 });
