@@ -60,8 +60,8 @@ Route::prefix('families')->group(function () {
     Route::post('/', CreateFamilyController::class);
     Route::get('/',GetFamiliesController::class);
     Route::get('/{id}', GetFamiliaByIdController::class);
-    Route::post('/addmemberfamily',AddMemberInFamiliaController::class);
-    Route::post('/removememberfamily', RemoveMemberController::class);
+    Route::post('/{id}/members',AddMemberInFamiliaController::class);
+    Route::delete('/{id}/member', RemoveMemberController::class);
 });
 
 
