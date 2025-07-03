@@ -65,15 +65,18 @@ test('Deve adicionar um membro a uma familia existente',function(){
     ];
 
     $response1 = $this->postJson("api/families/{$family['id']}/members",$data2);
-    dd($response1->json());
+
     $response1->assertStatus(200);
-})->only();
+});
 
 test('Deve pegar uma familia por id', function() {
-    $family = Family::factory()->create();
+    $data = Family::factory()->create();
 
-    $response = $this->get('api/family/'.$family->id);
+    $response = $this->getJson('api/families/'.$data->id);
+    $family = $response->json();
 
+    expect($family)->not()->toBeEmpty();
+    expect($family)->toHaveCount(5)->toHaveKeys(['id','nomefamilia','status',]);
 
     $response->assertStatus(200);
 });
