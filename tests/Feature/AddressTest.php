@@ -9,16 +9,8 @@ use App\Models\User;
 test('Deve criar um novo endereço', function () {
 
     $user = User::factory()->create();
-    // $data = [
-    //     'name' => fake()->name(),
-    //     'email' => fake()->email(),
-    //     'password' => fake()->regexify('[A-Z]{5}[0-4]{3}')
-    // ];
 
-    // $response1 = $this->postJson('/api/user/create',$data);
-    // $user = $response1->getData();
-
-    $data2 = [
+    $data = [
         'user_id' => $user->id,
         'rua' => 'Rua Teste',
         'numero' => '123',
@@ -26,15 +18,15 @@ test('Deve criar um novo endereço', function () {
         'bairro' => 'Centro'
     ];
 
-    $response = $this->postJson('/api/addresses',$data2);
+    $response = $this->postJson('/api/addresses',$data);
     $address = $response->json();
-    // dump($response->json());
+
 
     expect($address)->toBeArray();
     expect($address)->not()->toBeEmpty();
     expect($address)->toHaveCount(9);
     expect($address)->toHaveKeys(['rua','numero','complemento','bairro','cidade','id']);
-    $response->assertStatus(200);
+    $response->assertStatus(201);
 });
 
 // test('Não deve criar um endereco', function () {
@@ -73,7 +65,7 @@ test('Deve encontar um endereço', function () {
     $user = $response1->getData();
 
     $data = [
-        'user_id' => $user->id, // Um ID de usuário válido
+        'user_id' => $user->id, 
         'rua' => 'Rua Teste',
         'numero' => '123',
         'complemento' => 'Apto 456',
@@ -83,9 +75,8 @@ test('Deve encontar um endereço', function () {
     $response = $this->postJson('/api/addresses',$data);
     $idAddress = $response->json();
 
-    $response1 = $this->get('/api/addresses/'.$idAddress['id']);
+    $response1 = $this->getJson('/api/addresses/'.$idAddress['id']);
     $addressses = $response1->json();
-    // dump($response1->json());
 
     expect($addressses)->toBeArray();
     expect($addressses)->not()->toBeEmpty();

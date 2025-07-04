@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Address;
 
+use App\Actions\Address\FindAllAddressUserId;
+use App\Actions\Users\FindUserById;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\AddressService;
@@ -12,11 +14,11 @@ class FindByUserController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(string $id, AddressService $addressService)
+    public function __invoke(string $id, FindAllAddressUserId $findAllAddressUserId, FindUserById $findUserById)
     {
-        $user = User::find($id);
+        $user = $findUserById->execute($id);
 
-        $address = $addressService->findByUserId($user);
+        $address = $findAllAddressUserId->execute($user);
 
         return response()->json($address);
     }
