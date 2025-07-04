@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Baptism;
 
+use App\Actions\Baptism\GetBaptismByBaptizerId;
 use App\Http\Controllers\Controller;
 use App\Services\BaptismService;
 use Illuminate\Http\Request;
@@ -11,9 +12,9 @@ class GetBaptismByBaptizerIdController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(string $id, BaptismService $baptismService)
+    public function __invoke(string $id, GetBaptismByBaptizerId $getBaptismByBaptizerId)
     {
-        $baptmis = $baptismService->findByBaptizerById($id);
+        $baptmis = $getBaptismByBaptizerId->execute($id);
 
         return response()->json($baptmis);
     }

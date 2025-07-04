@@ -65,9 +65,9 @@ Route::prefix('families')->group(function () {
 });
 
 
-Route::prefix('baptism')->group(function() {
+Route::prefix('baptisms')->group(function() {
     Route::get('/{id}', GetBaptismByIdController::class);
-    Route::post('/create',CreateNewBatismoController::class);
+    Route::post('/',CreateNewBatismoController::class);
     Route::get('/member/{id}', GetBaptismByUserIdController::class);
     Route::get('/baptizer/{id}', GetBaptismByBaptizerIdController::class);
 });
