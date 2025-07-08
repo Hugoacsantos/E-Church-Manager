@@ -30,6 +30,6 @@ class AddLeaderController extends Controller
 
         $addLeaderMember->execute($user,$ministry);
 
-        return response()->json(['message' => 'Lider Adicionado']);
+        return response()->json(['message' => 'Lider Adicionado'],status: 201);
     }
 }
