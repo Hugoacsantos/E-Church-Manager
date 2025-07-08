@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Event;
 
+use App\Actions\Event\ListEventClose;
 use App\Http\Controllers\Controller;
-use App\Services\EventService;
-use Illuminate\Http\Request;
+
 
 class ListEventsCloseController extends Controller
 {
@@ -12,10 +12,10 @@ class ListEventsCloseController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(EventService $eventService)
+    public function __invoke(ListEventClose $listEventClose)
     {
-        $data = $eventService->eventsClose();
+        $data = $listEventClose->execute();
 
-        return \response()->json($data);
+        return response()->json($data);
     }
 }

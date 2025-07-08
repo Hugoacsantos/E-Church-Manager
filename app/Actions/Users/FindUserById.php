@@ -8,7 +8,7 @@ use App\Models\User;
 
 readonly class FindUserById {
 
-    public function execute(string $userId): User {
+    public function execute(int|string $userId): User {
         return User::find($userId);
     }
 

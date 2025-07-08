@@ -2,11 +2,10 @@
 
 namespace App\Services;
 
-use App\DTO\EventDTO;
+
 use App\Models\Event;
 use App\Models\EventUser;
 use App\Models\User;
-use DateTime;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -14,29 +13,6 @@ use Illuminate\Database\Eloquent\Collection;
 class EventService {
 
 
-    public function create(EventDTO $eventDTO): Event {
-
-        if(empty($eventDTO->status)) {
-            $eventDTO->status = 'Ativo';
-        }
-        if($this->dateValidation($eventDTO->data->getTimestamp()) === false) {
-            throw new Exception('A data nao pode ser menor que data atual');
-        }
-
-        $event = new Event();
-        $event->titulo = $eventDTO->titulo;
-        $event->descricao = $eventDTO->descricao;
-        $event->local = $eventDTO->local;
-        $event->data_encerramento = $eventDTO->data;
-        $event->status = $eventDTO->status;
-        $event->save();
-
-        return $event;
-    }
-
-    public function listAll(): Collection {
-        return Event::all();
-    }
 
     public function addMember(User $user, Event $evento): EventUser {
         if($evento->status === 'fechado') {
@@ -107,22 +83,6 @@ class EventService {
        return Event::find($id);
     }
 
-    private function dateValidation(string $data, int $minutosMinimos = 10): true {
-        // $dataFornecida = DateTime::createFromFormat('Y-m-d H:i:s', $data);
-        $dataFornecida = date('Y-m-d H:i:s', $data);
 
-        if ($dataFornecida === false) {
-            throw new Exception('Data nao passada');
-        }
-        $hora = date('H:i:s',$data);
-        $dataAtual = new DateTime();
-        $diferenca = abs(strtotime($hora) - $dataAtual->getTimestamp()) / 60;
-
-        if ($diferenca < $minutosMinimos) {
-            throw new Exception("O evento nao pode ter menos de {$minutosMinimos} de duracao");
-        }
-
-        return true;
-    }
 
 }

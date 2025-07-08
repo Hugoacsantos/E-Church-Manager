@@ -78,7 +78,6 @@ test('Deve adicionar usuario no evento', function() {
     ];
 
     $response = $this->postJson("api/events/{$event['id']}/members",$data);
-
     $response->assertStatus(200);
 });
 

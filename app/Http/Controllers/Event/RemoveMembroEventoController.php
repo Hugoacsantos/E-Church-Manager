@@ -2,36 +2,35 @@
 
 namespace App\Http\Controllers\Event;
 
+use App\Actions\Event\GetByIdEvent;
+use App\Actions\Event\RemoveMemberEvent;
+use App\Actions\Users\FindUserById;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddMembroEventoRequest;
-use App\Models\Event;
-use App\Services\EventService;
-use App\Services\UserService;
 use Exception;
-use Illuminate\Http\Request;
 
-class RemoveMembroEventoController extends Controller
-{
+
+class RemoveMembroEventoController extends Controller {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(AddMembroEventoRequest $request,string $eventId, EventService $eventService,UserService $userService)
+    public function __invoke(AddMembroEventoRequest $request,string $eventId, FindUserById $findUserById, GetByIdEvent $getByIdEvent, RemoveMemberEvent $removeMemberEvent)
     {
         $data =  $request->validated();
 
-        $event_id = $eventService->findById($eventId);
+        $event_id = $getByIdEvent->execute($eventId);
 
         if(!$event_id) {
             throw new Exception('Evento nao existe');
         }
 
-        $user_id = $userService->findById($data['user_id']);
+        $user_id = $findUserById->execute($data['user_id']);
 
         if(!$user_id) {
             throw new Exception('Usuario nao existe');
         }
 
-        $eventService->removeMember($user_id,$event_id);
+        $removeMemberEvent->execute($user_id,$event_id);
 
         return \response()->json('Membro removido');
     }

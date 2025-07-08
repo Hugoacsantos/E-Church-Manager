@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Event;
 
+use App\Actions\Event\ListEventOpen;
 use App\Http\Controllers\Controller;
-use App\Services\EventService;
-use Illuminate\Http\Request;
 
 class ListEventsOpenController extends Controller
 {
@@ -13,10 +12,10 @@ class ListEventsOpenController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(EventService $eventService) {
+    public function __invoke(ListEventOpen $listEventOpen) {
 
-        $data = $eventService->eventsOpen();
+        $data = $listEventOpen->execute();
 
-        return \response()->json($data);
+        return response()->json($data);
     }
 }
