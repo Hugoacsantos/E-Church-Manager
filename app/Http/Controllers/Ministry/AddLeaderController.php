@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Ministry;
 
+use App\Actions\Ministry\AddLeaderMember;
 use App\Http\Controllers\Controller;
 use App\Models\Ministry;
 use App\Models\User;
@@ -14,7 +15,7 @@ class AddLeaderController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request, MinistryService $ministryService)
+    public function __invoke(Request $request, AddLeaderMember $addLeaderMember)
     {
         $ministry_id = $request->input('ministry_id');
         $ministry = Ministry::find($ministry_id);
@@ -27,7 +28,7 @@ class AddLeaderController extends Controller
             throw new Exception('Ministerio nao existe');
         }
 
-        $ministryService->addLeader($user,$ministry);
+        $addLeaderMember->execute($user,$ministry);
 
         return response()->json(['message' => 'Lider Adicionado']);
     }

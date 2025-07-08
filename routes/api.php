@@ -29,6 +29,7 @@ use App\Http\Controllers\Family\GetFamiliesController;
 use App\Http\Controllers\Family\RemoveMemberController;
 use App\Http\Controllers\FeedBack\CreateFeedbackController;
 use App\Http\Controllers\Ministry\AddLeaderController;
+use App\Http\Controllers\Ministry\AddMemberMinistryController;
 use App\Http\Controllers\Ministry\CreateMinistryController;
 
 
@@ -85,7 +86,8 @@ Route::prefix('events')->group(function() {
 
 Route::prefix('ministries')->group(function() {
     Route::post('/', CreateMinistryController::class);
-    Route::post('/{ministryId}/members', AddLeaderController::class);
+    Route::post('/{ministryId}/leaders', AddLeaderController::class);
+    Route::post('/{ministryId}/members', AddMemberMinistryController::class);
 });
 
 Route::prefix('aviso')->group(function() {

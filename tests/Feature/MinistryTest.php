@@ -50,3 +50,23 @@ test('Deve adicionar um novo lider', function(){
 
     $response->assertStatus(200);
 });
+
+
+test('Deve adicionar um novo membro ao ministerio', function() {
+    $user = User::factory()->create();
+
+    $data_ministry = [
+        'titulo' => 'Titulo qualquer',
+        'descricao' => 'Alguma descricao legal',
+        'status' => 'nullable'
+    ];
+    $response = $this->postJson('api/ministries',$data_ministry);
+
+    $ministry = $response->json();
+
+
+    $response1 = $this->postJson("api/ministries/{$ministry['id']}/members",['user_id' => $user->id]);
+    dump($response1->json()['message']);
+    $response1->assertStatus(201);
+    expect($response1->json()['message'])->toEqual('usuario adicionado');
+});
