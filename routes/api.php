@@ -31,6 +31,7 @@ use App\Http\Controllers\FeedBack\CreateFeedbackController;
 use App\Http\Controllers\Ministry\AddLeaderController;
 use App\Http\Controllers\Ministry\AddMemberMinistryController;
 use App\Http\Controllers\Ministry\CreateMinistryController;
+use App\Http\Controllers\Ministry\FindoByIdMinistryController;
 use App\Http\Controllers\Ministry\RemoveMemberMinistryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -85,6 +86,7 @@ Route::prefix('events')->group(function() {
 
 Route::prefix('ministries')->group(function() {
     Route::post('/', CreateMinistryController::class);
+    Route::get('/{ministryId}',FindoByIdMinistryController::class);
     Route::post('/{ministryId}/leaders', AddLeaderController::class);
     Route::post('/{ministryId}/members', AddMemberMinistryController::class);
     Route::delete('/{ministryId}/members', RemoveMemberMinistryController::class);

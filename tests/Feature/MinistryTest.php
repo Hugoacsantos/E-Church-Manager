@@ -46,9 +46,10 @@ test('Deve adicionar um novo lider', function(){
         'ministry_id' => $ministry->id
     ];
 
-    $response = $this->postJson("api/ministries/{$data['ministry_id']}/members",$data);
+    $response = $this->postJson("api/ministries/{$data['ministry_id']}/leaders",$data);
 
-    $response->assertStatus(200);
+    $response->assertStatus(201);
+    expect($response->json()['message'])->toEqual('Lider Adicionado');
 });
 
 
@@ -66,7 +67,7 @@ test('Deve adicionar um novo membro ao ministerio', function() {
 
 
     $response1 = $this->postJson("api/ministries/{$ministry['id']}/members",['user_id' => $user->id]);
-    dump($response1->json()['message']);
+
     $response1->assertStatus(201);
     expect($response1->json()['message'])->toEqual('usuario adicionado');
 });
@@ -83,10 +84,29 @@ test('Deve remover um novo membro do ministerio', function() {
 
     $ministry = $response->json();
 
-    $response1 = $this->postJson("api/ministries/{$ministry['id']}/members",['user_id' => $user->id]);
+    $this->postJson("api/ministries/{$ministry['id']}/members",['user_id' => $user->id]);
     
     $response2 = $this->deleteJson("api/ministries/{$ministry['id']}/members",['user_id' => $user->id]);
-    dump($response2->json()['message']);
+
     $response2->assertStatus(200);
     expect($response2->json()['message'])->toEqual('usuario removido');
+});
+
+test('Deve encontrar um ministerio por id', function() {
+    $data_ministry = [
+        'titulo' => 'Titulo qualquer',
+        'descricao' => 'Alguma descricao legal',
+        'status' => 'nullable'
+    ];
+    $response = $this->postJson('api/ministries',$data_ministry);
+
+    $ministry = $response->json();
+
+    $response1 = $this->getJson('api/ministries/'.$ministry['id']);
+
+    $data_ministry = $response1->json();
+
+    expect($data_ministry)->toBeArray()->not()->toBeEmpty();
+    expect($data_ministry)->toHaveKeys(['id']);
+    $response1->assertStatus(200);
 });
