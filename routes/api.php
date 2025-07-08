@@ -4,6 +4,7 @@ use App\Http\Controllers\Address\CreateAddressController;
 use App\Http\Controllers\Address\FindAddressController;
 use App\Http\Controllers\Address\FindByUserController;
 use App\Http\Controllers\Address\GetAddressesController;
+use App\Http\Controllers\Announcements\CreateAnnouncementsController;
 use App\Http\Controllers\Announcements\CreateController;
 use App\Http\Controllers\Baptism\CreateNewBatismoController;
 use App\Http\Controllers\Baptism\GetBaptismByBaptizerIdController;
@@ -92,8 +93,8 @@ Route::prefix('ministries')->group(function() {
     Route::delete('/{ministryId}/members', RemoveMemberMinistryController::class);
 });
 
-Route::prefix('aviso')->group(function() {
-    Route::post('/create', CreateController::class);
+Route::prefix('announcements')->group(function() {
+    Route::post('/', CreateAnnouncementsController::class);
 });
 
 Route::prefix('feedback')->group(function() {
