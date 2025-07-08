@@ -70,3 +70,23 @@ test('Deve adicionar um novo membro ao ministerio', function() {
     $response1->assertStatus(201);
     expect($response1->json()['message'])->toEqual('usuario adicionado');
 });
+
+test('Deve remover um novo membro do ministerio', function() {
+    $user = User::factory()->create();
+
+    $data_ministry = [
+        'titulo' => 'Titulo qualquer',
+        'descricao' => 'Alguma descricao legal',
+        'status' => 'nullable'
+    ];
+    $response = $this->postJson('api/ministries',$data_ministry);
+
+    $ministry = $response->json();
+
+    $response1 = $this->postJson("api/ministries/{$ministry['id']}/members",['user_id' => $user->id]);
+    
+    $response2 = $this->deleteJson("api/ministries/{$ministry['id']}/members",['user_id' => $user->id]);
+    dump($response2->json()['message']);
+    $response2->assertStatus(200);
+    expect($response2->json()['message'])->toEqual('usuario removido');
+});

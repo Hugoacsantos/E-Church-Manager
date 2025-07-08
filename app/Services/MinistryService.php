@@ -11,77 +11,12 @@ use Exception;
 
 class MinistryService {
 
-    public function create(MinistryDTO $ministryDTO): Ministry {
 
-        if(blank($ministryDTO->status)) {
-            $ministryDTO->status = 'Ativo';
-        }
-        $ministry = new Ministry();
-        $ministry->titulo = $ministryDTO->titulo;
-        $ministry->descricao = $ministryDTO->descricao;
-        $ministry->status = $ministryDTO->status;
-        $ministry->save();
 
-        return $ministry;
-    }
 
-    public function addLeader(User $user, Ministry $ministerio): true {
-        $ministryExists = MinistryUser::query()
-                                            ->where('ministerio_id', $ministerio->id)
-                                            ->where('user_id', $user->id)
-                                            ->exists();
 
-        if($ministryExists) {
-            throw new Exception('Usuario ja cadastrado no ministerio');
-        }
 
-        $ministry = new MinistryUser();
-        $ministry->tipo_usuario = 'Lider';
-        $ministry->user_id = $user->id;
-        $ministry->ministerio_id = $ministerio->id;
-        $ministry->status = 'Ativo';
 
-        return $ministry->save();
-    }
-
-    public function addMember(User $user, Ministry $ministerio): true {
-
-        $ministryExists = MinistryUser::query()
-                                            ->where('ministerio_id', $ministerio->id)
-                                            ->where('user_id', $user->id)
-                                            ->exists();
-
-        if($ministryExists) {
-            throw new Exception('Usuario ja cadastrado no ministerio');
-        }
-
-        $ministry = new MinistryUser();
-        $ministry->tipo_usuario = 'Membro';
-        $ministry->user_id = $user->id;
-        $ministry->ministerio_id = $ministerio->id;
-        $ministry->status = 'Ativo';
-
-        return $ministry->save();
-    }
-
-    public function removeMember(User $user, Ministry $ministerio): true {
-
-        $ministryExists = MinistryUser::query()
-                                            ->where('ministerio_id', $ministerio->id)
-                                            ->where('user_id', $user->id)
-                                            ->exists();
-
-        if(!$ministryExists) {
-            throw new Exception('Usuario nao esta no ministerio');
-        }
-
-        $userMinistry = MinistryUser::query()
-                                            ->where('ministerio_id', $ministerio->id)
-                                            ->where('user_id', $user->id)
-                                            ->first();
-
-        return $userMinistry->delete();
-    }
 
 
 
