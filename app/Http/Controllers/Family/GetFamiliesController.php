@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Family;
 
 use App\Http\Controllers\Controller;
-use App\Services\FamilyService;
+use App\Models\Family;
+
 
 class GetFamiliesController extends Controller
 {
     /**
      * Handle the incoming request.
      */
-    public function __invoke(FamilyService $familyService)
+    public function __invoke()
     {
-        $families = $familyService->listAllFamily();
+        $families = Family::all();
 
         return response()->json($families);
     }

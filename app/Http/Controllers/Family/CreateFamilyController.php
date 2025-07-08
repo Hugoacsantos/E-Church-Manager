@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Family;
 
+use App\Actions\Family\CreateFamily;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateFamilyRequest;
 use App\Services\FamilyService;
@@ -11,11 +12,11 @@ class CreateFamilyController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(CreateFamilyRequest $request, FamilyService $familyService)
+    public function __invoke(CreateFamilyRequest $request, CreateFamily $createFamily)
     {
 
-        $family = $familyService->create($request->toDTO());
+        $family = $createFamily->execute($request->toDTO());
 
-        return \response()->json($family);
+        return response()->json($family);
     }
 }
