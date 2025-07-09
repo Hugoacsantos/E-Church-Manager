@@ -34,6 +34,8 @@ use App\Http\Controllers\Ministry\AddMemberMinistryController;
 use App\Http\Controllers\Ministry\CreateMinistryController;
 use App\Http\Controllers\Ministry\FindoByIdMinistryController;
 use App\Http\Controllers\Ministry\RemoveMemberMinistryController;
+use App\Http\Controllers\Participations\ListEventParticipationController;
+use App\Http\Controllers\Participations\ListUserParticipationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -53,8 +55,7 @@ Route::prefix('addresses')->group(function () {
     Route::get('/',GetAddressesController::class);
     Route::get('/user/{id}', FindByUserController::class);
     Route::get('/{id}',FindAddressController::class);
-    Route::post('/',CreateAddressController::class);
-    
+    Route::post('/',CreateAddressController::class); 
 });
 
 
@@ -74,7 +75,7 @@ Route::prefix('baptisms')->group(function() {
     Route::get('/baptizer/{id}', GetBaptismByBaptizerIdController::class);
 });
 
-//Falta testar os endpoints
+
 Route::prefix('events')->group(function() {
     Route::get('/',ListAllEvents::class);
     Route::get("/{id}",GetByIdEventController::class);
@@ -97,6 +98,7 @@ Route::prefix('announcements')->group(function() {
     Route::post('/', CreateAnnouncementsController::class);
 });
 
-Route::prefix('feedback')->group(function() {
-    Route::post('/create', CreateFeedbackController::class);
+Route::prefix('participations')->group(function() {
+    Route::get('/users/{userId}', ListUserParticipationController::class); 
+    Route::get('/events/{eventId}', ListEventParticipationController::class);
 });

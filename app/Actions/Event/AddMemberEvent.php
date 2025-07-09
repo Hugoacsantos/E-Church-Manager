@@ -6,14 +6,16 @@ namespace App\Actions\Event;
 
 use App\Models\Event;
 use App\Models\EventUser;
+use App\Models\ParticipationHistory;
 use App\Models\User;
+use DateTime;
 use Exception;
 
 readonly class AddMemberEvent {
 
     public function execute(User $user, Event $evento): EventUser {
         if($evento->status === 'fechado') {
-            throw new Exception('Nao foi possivel associar membro a evento devido ao evento esta fechado');
+            throw new Exception('Nao foi possivel associar membro a evento devido ao evento estar fechado');
         }
 
 
@@ -33,6 +35,12 @@ readonly class AddMemberEvent {
         $eventUser->evento_id = $evento->id;
         $eventUser->save();
 
+        $participation = new ParticipationHistory();
+        $participation->member_id = $user->id;
+        $participation->event_id = $evento->id;
+        $participation->participation_date = new DateTime('now');
+        $participation->save();
+        
         return $eventUser;
     }
 
