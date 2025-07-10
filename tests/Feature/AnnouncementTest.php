@@ -19,7 +19,7 @@ test('Deve criar um novo aviso', function () {
 
     $response = $this->postJson('/api/announcements',$data);
     $data_response = $response->json();
-    dump($data_response);
+
 
     expect($data_response)->toBeArray();
     expect($data_response)->toHaveKeys(['id','criado_por','titulo','aviso']);
